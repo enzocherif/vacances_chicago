@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chicago entre potes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout : même carnet de voyage que le road trip famille. En-tête, bandeau des jours collant, une fiche par jour avec une frise horaire. */
+:root {
+  --bg: #eef1f5;
+  --surface: #ffffff;
+  --soft: #f4f6f9;
+  --ink: #141b29;
+  --muted: #5a6476;
+  --line: #dfe3ea;
+  --accent: #1d4ed8;
+  --hero: #0f2741;
+  --hero-ink: #f4f6fb;
+  --d1: #41b6e6;
+  --d2: #e4002b;
+  --d3: #e0a100;
+  --d4: #2f8f6b;
+  --d5: #7a5cd6;
+  --chip-ink: #141b29;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1219; --surface: #171d27; --soft: #1f2632; --ink: #eef1f6; --muted: #a3acbb; --line: #2a3240;
+    --accent: #8aa9ff; --hero: #1b2a4a; --hero-ink: #f4f6fb;
+    --d1: #7fd0f2; --d2: #ef6a6d; --d3: #f2bd3a; --d4: #4fc196; --d5: #a48cf0; --chip-ink: #0e1219;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1219; --surface: #171d27; --soft: #1f2632; --ink: #eef1f6; --muted: #a3acbb; --line: #2a3240;
+  --accent: #8aa9ff; --hero: #1b2a4a; --hero-ink: #f4f6fb;
+  --d1: #7fd0f2; --d2: #ef6a6d; --d3: #f2bd3a; --d4: #4fc196; --d5: #a48cf0; --chip-ink: #0e1219;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 84px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 640px; margin: 0 auto; padding-inline: 16px; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+
+/* En-tête */
+.hero-band { background: var(--hero); color: var(--hero-ink); }
+.hero { padding-block: 28px 22px; }
+.eyebrow { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; font-weight: 700; margin: 0 0 8px; }
+.hero h1 { font-size: clamp(32px, 9vw, 44px); font-weight: 800; letter-spacing: -.01em; }
+.hero .dates { margin: 10px 0 0; opacity: .85; }
+.route { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+.route a {
+  display: block; text-decoration: none; color: var(--hero-ink);
+  padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.08);
+  border-top: 4px solid var(--c);
+}
+.route b { display: block; font-family: var(--font-display); font-size: 17px; }
+.route span { font-size: 14px; opacity: .8; }
+.today-btn { display: none; margin: 14px 0 0; }
+.today-btn.show { display: block; }
+.today-btn a { display: block; text-align: center; padding: 13px; border-radius: 12px; background: var(--d1); color: var(--chip-ink); font-weight: 700; text-decoration: none; }
+
+/* Bandeau des jours */
+.days-nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 12px -10px rgba(0,0,0,.35);
+}
+.days-nav .scroller { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.days-nav .scroller::-webkit-scrollbar { display: none; }
+.days-nav ol { display: flex; gap: 6px; margin: 0 auto; padding: 10px 16px; list-style: none; width: max-content; }
+.days-nav a {
+  display: flex; flex-direction: column; align-items: center; min-width: 52px; padding: 5px 8px 6px;
+  border-radius: 12px; text-decoration: none; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); box-shadow: inset 0 4px 0 var(--c);
+}
+.days-nav .wd { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin-top: 3px; }
+.days-nav .dn { font-family: var(--font-display); font-size: 21px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.days-nav a.is-current { border-color: var(--ink); }
+.days-nav a.is-today { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.days-nav a.is-today .wd { color: var(--bg); }
+
+/* Fiches jour */
+main { display: flex; flex-direction: column; gap: 20px; padding-block: 20px 8px; }
+.day { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.day header {
+  padding: 18px 16px 14px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 14%, var(--surface)), var(--surface));
+  border-top: 6px solid var(--c);
+}
+.day .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 700; }
+.tag { background: var(--c); color: var(--chip-ink); padding: 2px 10px; border-radius: 999px; font-size: 13px; }
+.day h2 { font-size: 25px; font-weight: 800; }
+.day .sub { margin: 6px 0 0; color: var(--muted); }
+.day .body { padding: 6px 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+
+/* Chiffres clés */
+.stats { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.stats div { background: var(--soft); border-radius: 12px; padding: 8px 10px; min-width: 0; }
+.stats dt { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.stats dd { margin: 2px 0 0; font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+
+/* Frise horaire */
+.timeline { list-style: none; margin: 4px 0 0; padding: 0; }
+.timeline li { position: relative; padding: 0 0 18px 26px; }
+.timeline li::before {
+  content: ""; position: absolute; left: 0; top: 5px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface); border: 3px solid var(--c, var(--accent));
+}
+.timeline li::after { content: ""; position: absolute; left: 5px; top: 20px; bottom: 0; width: 2px; background: var(--line); }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li:last-child::after { display: none; }
+.timeline time { display: block; font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.4; }
+.timeline li div { min-width: 0; color: var(--muted); font-size: 16px; }
+.timeline b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 2px; }
+
+/* Créneaux simples (jours pas encore détaillés) */
+.slots { margin: 0; display: grid; grid-template-columns: 6.2em minmax(0, 1fr); gap: 10px 12px; }
+.slots dt { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--muted); padding-top: 1px; }
+.slots dd { margin: 0; min-width: 0; }
+.todo { color: var(--muted); font-style: italic; }
+
+/* Boutons Google Maps */
+.maps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.map {
+  display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px 5px 8px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent);
+  font-size: 14px; font-weight: 700; text-decoration: none; line-height: 1.25; white-space: nowrap;
+}
+
+/* Encadrés */
+.info { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--soft); font-size: 15px; }
+.info b { display: block; font-size: 16px; }
+.info .ico { font-size: 18px; line-height: 1.3; flex: none; width: 22px; text-align: center; }
+.info > div { min-width: 0; }
+.info.key { background: color-mix(in srgb, var(--c) 16%, var(--surface)); }
+.note { margin: 0; font-size: 15px; color: var(--muted); }
+
+/* Menus dépliants */
+.plan-b { border: 1px solid var(--line); border-radius: 14px; padding: 0 14px; }
+.plan-b summary { cursor: pointer; font-weight: 700; padding: 13px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.plan-b summary::-webkit-details-marker { display: none; }
+.plan-b summary::after { content: "+"; font-family: var(--font-display); font-size: 22px; line-height: 1; color: var(--accent); flex: none; }
+.plan-b[open] summary::after { content: "–"; }
+.plan-b .slots, .plan-b .timeline { padding-bottom: 14px; }
+
+/* Infos pratiques */
+.practical { padding-block: 14px 8px; }
+.practical h2 { font-size: 25px; margin: 0 0 12px; }
+.practical .grid { display: flex; flex-direction: column; gap: 10px; }
+.practical .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px; display: flex; flex-direction: column; gap: 4px; }
+.practical h3 { font-size: 17px; }
+.practical p { margin: 0; }
+.top-link { display: inline-block; margin: 14px 0 0; font-weight: 700; }
+footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
+.table-wrap { overflow-x: auto; padding-bottom: 8px; }
+.dist { width: 100%; border-collapse: collapse; font-size: 15px; }
+.dist td { padding: 7px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.dist td + td { text-align: right; white-space: nowrap; padding-left: 12px; font-variant-numeric: tabular-nums; font-weight: 700; }
+.dist tr:first-child td { border-top: 0; }
+.dist .total td { font-weight: 800; border-top: 2px solid var(--ink); }
+.plan-b > .note { padding-bottom: 14px; }
+.plan-b .slots dd b { display: inline; }
+</style>
+</head>
+<body>
+
+<div class="hero-band">
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Entre potes · Chicago</p>
+    <h1 id="haut">Nos vacances à Chicago</h1>
+    <p class="dates">Du mercredi au dimanche, 5 jours dans la Windy City. Dates exactes à venir.</p>
+    <ul class="route" aria-label="Jours">
+      <li><a href="#mer" style="--c: var(--d1)"><b>Mer</b><span>Jour 1</span></a></li>
+      <li><a href="#jeu" style="--c: var(--d2)"><b>Jeu</b><span>Jour 2</span></a></li>
+      <li><a href="#ven" style="--c: var(--d3)"><b>Ven</b><span>Jour 3</span></a></li>
+      <li><a href="#sam" style="--c: var(--d4)"><b>Sam</b><span>Jour 4</span></a></li>
+      <li><a href="#dim" style="--c: var(--d5)"><b>Dim</b><span>Jour 5</span></a></li>
+    </ul>
+    <p class="today-btn" id="today-btn"><a href="#">Voir le programme d'aujourd'hui</a></p>
+  </header>
+</div>
+</div>
+
+<nav class="days-nav" aria-label="Jours du voyage">
+  <div class="scroller">
+    <ol>
+      <li><a href="#mer" style="--c: var(--d1)"><span class="wd">Mer</span><span class="dn">1</span></a></li>
+      <li><a href="#jeu" style="--c: var(--d2)"><span class="wd">Jeu</span><span class="dn">2</span></a></li>
+      <li><a href="#ven" style="--c: var(--d3)"><span class="wd">Ven</span><span class="dn">3</span></a></li>
+      <li><a href="#sam" style="--c: var(--d4)"><span class="wd">Sam</span><span class="dn">4</span></a></li>
+      <li><a href="#dim" style="--c: var(--d5)"><span class="wd">Dim</span><span class="dn">5</span></a></li>
+      <li><a href="#infos" style="--c: var(--muted)"><span class="wd">Infos</span><span class="dn">i</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<div class="wrap">
+<main>
+
+  <section class="day" id="mer" data-date="" style="--c: var(--d1)">
+    <header>
+      <p class="meta"><span class="tag">Chicago</span> Mercredi · Jour 1</p>
+      <h2>Arrivée à Chicago</h2>
+      <p class="sub">Vol, arrivée, installation au logement et première soirée.</p>
+    </header>
+    <div class="body">
+      <dl class="slots">
+        <dt>Matin</dt><dd class="todo">À venir</dd>
+        <dt>Midi</dt><dd class="todo">À venir</dd>
+        <dt>Après-midi</dt><dd class="todo">À venir</dd>
+        <dt>Soir</dt><dd class="todo">À venir</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="day" id="jeu" data-date="" style="--c: var(--d2)">
+    <header>
+      <p class="meta"><span class="tag">Chicago</span> Jeudi · Jour 2</p>
+      <h2>Journée 2</h2>
+      <p class="sub">Programme à venir.</p>
+    </header>
+    <div class="body">
+      <dl class="slots">
+        <dt>Matin</dt><dd class="todo">À venir</dd>
+        <dt>Midi</dt><dd class="todo">À venir</dd>
+        <dt>Après-midi</dt><dd class="todo">À venir</dd>
+        <dt>Soir</dt><dd class="todo">À venir</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="day" id="ven" data-date="" style="--c: var(--d3)">
+    <header>
+      <p class="meta"><span class="tag">Chicago</span> Vendredi · Jour 3</p>
+      <h2>Journée 3</h2>
+      <p class="sub">Programme à venir.</p>
+    </header>
+    <div class="body">
+      <dl class="slots">
+        <dt>Matin</dt><dd class="todo">À venir</dd>
+        <dt>Midi</dt><dd class="todo">À venir</dd>
+        <dt>Après-midi</dt><dd class="todo">À venir</dd>
+        <dt>Soir</dt><dd class="todo">À venir</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="day" id="sam" data-date="" style="--c: var(--d4)">
+    <header>
+      <p class="meta"><span class="tag">Chicago</span> Samedi · Jour 4</p>
+      <h2>Journée 4</h2>
+      <p class="sub">Programme à venir.</p>
+    </header>
+    <div class="body">
+      <dl class="slots">
+        <dt>Matin</dt><dd class="todo">À venir</dd>
+        <dt>Midi</dt><dd class="todo">À venir</dd>
+        <dt>Après-midi</dt><dd class="todo">À venir</dd>
+        <dt>Soir</dt><dd class="todo">À venir</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="day" id="dim" data-date="" style="--c: var(--d5)">
+    <header>
+      <p class="meta"><span class="tag">Chicago</span> Dimanche · Jour 5</p>
+      <h2>Départ</h2>
+      <p class="sub">Dernière balade, puis direction l'aéroport.</p>
+    </header>
+    <div class="body">
+      <dl class="slots">
+        <dt>Matin</dt><dd class="todo">À venir</dd>
+        <dt>Midi</dt><dd class="todo">À venir</dd>
+        <dt>Après-midi</dt><dd class="todo">À venir</dd>
+        <dt>Soir</dt><dd class="todo">À venir</dd>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<section class="practical" id="infos">
+  <h2>Infos pratiques</h2>
+  <div class="grid">
+    <div class="card"><h3>Logement</h3><p class="todo">Adresse à ajouter.</p></div>
+    <div class="card"><h3>Vols</h3><p class="todo">Aller (mercredi) et retour (dimanche) : numéros de vol à ajouter.</p></div>
+    <div class="card"><h3>La bande</h3><p class="todo">Qui vient : à ajouter.</p></div>
+    <div class="card"><h3>Se déplacer</h3><p>Le métro de Chicago, c'est le « L » (CTA). Ventra marche directement avec une carte bancaire sans contact.</p></div>
+    <div class="card"><h3>Numéros utiles</h3><p>Urgences aux États-Unis : <b>911</b>.</p></div>
+    <div class="card"><h3>Décalage horaire</h3><p>Chicago a 7 h de moins que la France.</p></div>
+  </div>
+  <a class="top-link" href="#haut">↑ Retour en haut</a>
+</section>
+
+<footer>Programme détaillé à venir, jour par jour.</footer>
+</div>
+
+<script>
+(function () {
+  if (!("IntersectionObserver" in window)) return;
+  var links = {};
+  document.querySelectorAll('.days-nav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var a = links[e.target.id]; if (!a) return;
+      Object.keys(links).forEach(function (k) { links[k].classList.remove('is-current'); });
+      a.classList.add('is-current');
+      var sc = a.closest('.scroller'); if (sc) sc.scrollTo({ left: a.offsetLeft - sc.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+    });
+  }, { rootMargin: '-90px 0px -70% 0px' });
+  document.querySelectorAll('.day, #infos').forEach(function (el) { io.observe(el); });
+})();
+(function () {
+  var d = new Date();
+  var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+  var today = d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  var sec = document.querySelector('.day[data-date="' + today + '"]');
+  if (!sec) return;
+  var link = document.querySelector('.days-nav a[href="#' + sec.id + '"]');
+  if (link) { link.classList.add("is-today"); link.setAttribute("aria-current", "date"); link.scrollIntoView({ inline: "center", block: "nearest" }); }
+  var btn = document.getElementById("today-btn");
+  btn.querySelector("a").setAttribute("href", "#" + sec.id);
+  btn.classList.add("show");
+})();
+</script>
+</body>
+</html>
