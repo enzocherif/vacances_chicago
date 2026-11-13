@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Chicago entre potes</title>
+<title>Chicago à Thanksgiving</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -176,6 +176,14 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 .dist .total td { font-weight: 800; border-top: 2px solid var(--ink); }
 .plan-b > .note { padding-bottom: 14px; }
 .plan-b .slots dd b { display: inline; }
+
+/* Checklist de réservation */
+.checks { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.checks label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
+.checks input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
+.checks input:checked + span { text-decoration: line-through; color: var(--muted); }
+.price { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.1; }
+.ext { font-weight: 700; }
 </style>
 </head>
 <body>
@@ -183,15 +191,15 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 <div class="hero-band">
 <div class="wrap">
   <header class="hero">
-    <p class="eyebrow">Entre potes · Chicago</p>
-    <h1 id="haut">Nos vacances à Chicago</h1>
-    <p class="dates">Du mercredi au dimanche, 5 jours dans la Windy City. Dates exactes à venir.</p>
-    <ul class="route" aria-label="Jours">
-      <li><a href="#mer" style="--c: var(--d1)"><b>Mer</b><span>Jour 1</span></a></li>
-      <li><a href="#jeu" style="--c: var(--d2)"><b>Jeu</b><span>Jour 2</span></a></li>
-      <li><a href="#ven" style="--c: var(--d3)"><b>Ven</b><span>Jour 3</span></a></li>
-      <li><a href="#sam" style="--c: var(--d4)"><b>Sam</b><span>Jour 4</span></a></li>
-      <li><a href="#dim" style="--c: var(--d5)"><b>Dim</b><span>Jour 5</span></a></li>
+    <p class="eyebrow">Avec Noé · Thanksgiving 2026</p>
+    <h1 id="haut">Chicago à Thanksgiving</h1>
+    <p class="dates">Du mercredi 25 au dimanche 29 novembre 2026. 5 jours, 4 nuits à l'Ohio House, presque tout à pied.</p>
+    <ul class="route" aria-label="Programme">
+      <li><a href="#mer-25" style="--c: var(--d1)"><b>Mer 25</b><span>Arrivée</span></a></li>
+      <li><a href="#jeu-26" style="--c: var(--d2)"><b>Jeu 26</b><span>Thanksgiving</span></a></li>
+      <li><a href="#ven-27" style="--c: var(--d3)"><b>Ven 27</b><span>Loop & rivière</span></a></li>
+      <li><a href="#sam-28" style="--c: var(--d4)"><b>Sam 28</b><span>Lac & Navy Pier</span></a></li>
+      <li><a href="#dim-29" style="--c: var(--d5)"><b>Dim 29</b><span>Retour</span></a></li>
     </ul>
     <p class="today-btn" id="today-btn"><a href="#">Voir le programme d'aujourd'hui</a></p>
   </header>
@@ -201,11 +209,11 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 <nav class="days-nav" aria-label="Jours du voyage">
   <div class="scroller">
     <ol>
-      <li><a href="#mer" style="--c: var(--d1)"><span class="wd">Mer</span><span class="dn">1</span></a></li>
-      <li><a href="#jeu" style="--c: var(--d2)"><span class="wd">Jeu</span><span class="dn">2</span></a></li>
-      <li><a href="#ven" style="--c: var(--d3)"><span class="wd">Ven</span><span class="dn">3</span></a></li>
-      <li><a href="#sam" style="--c: var(--d4)"><span class="wd">Sam</span><span class="dn">4</span></a></li>
-      <li><a href="#dim" style="--c: var(--d5)"><span class="wd">Dim</span><span class="dn">5</span></a></li>
+      <li><a href="#mer-25" style="--c: var(--d1)"><span class="wd">Mer</span><span class="dn">25</span></a></li>
+      <li><a href="#jeu-26" style="--c: var(--d2)"><span class="wd">Jeu</span><span class="dn">26</span></a></li>
+      <li><a href="#ven-27" style="--c: var(--d3)"><span class="wd">Ven</span><span class="dn">27</span></a></li>
+      <li><a href="#sam-28" style="--c: var(--d4)"><span class="wd">Sam</span><span class="dn">28</span></a></li>
+      <li><a href="#dim-29" style="--c: var(--d5)"><span class="wd">Dim</span><span class="dn">29</span></a></li>
       <li><a href="#infos" style="--c: var(--muted)"><span class="wd">Infos</span><span class="dn">i</span></a></li>
     </ol>
   </div>
@@ -213,84 +221,104 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 
 <div class="wrap">
 <main>
+  <p class="note">On regroupe les visites par quartier pour tout voir sans passer la journée dans les transports, en gardant du temps pour manger, prendre des photos et profiter.</p>
 
-  <section class="day" id="mer" data-date="" style="--c: var(--d1)">
+  <section class="day" id="mer-25" data-date="2026-11-25" style="--c: var(--d1)">
     <header>
-      <p class="meta"><span class="tag">Chicago</span> Mercredi · Jour 1</p>
+      <p class="meta"><span class="tag">Mercredi 25 novembre</span> Jour 1</p>
       <h2>Arrivée à Chicago</h2>
-      <p class="sub">Vol, arrivée, installation au logement et première soirée.</p>
+      <p class="sub">Arrivée tardive en voiture depuis Pittsburgh. Aucune visite prévue ce soir.</p>
     </header>
     <div class="body">
-      <dl class="slots">
-        <dt>Matin</dt><dd class="todo">À venir</dd>
-        <dt>Midi</dt><dd class="todo">À venir</dd>
-        <dt>Après-midi</dt><dd class="todo">À venir</dd>
-        <dt>Soir</dt><dd class="todo">À venir</dd>
-      </dl>
+      <div class="info key"><span class="ico" aria-hidden="true">🏨</span><div><b>Ohio House Motel</b>600 N LaSalle Dr, Chicago, IL 60654. Installation, on gare la voiture et dodo : grosse journée demain.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></div>
+      <ol class="timeline">
+        <li><time>Soir</time><div><b>Arrivée à l'hôtel</b>Check-in, stationnement de la voiture, repos.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="day" id="jeu" data-date="" style="--c: var(--d2)">
+  <section class="day" id="jeu-26" data-date="2026-11-26" style="--c: var(--d2)">
     <header>
-      <p class="meta"><span class="tag">Chicago</span> Jeudi · Jour 2</p>
-      <h2>Journée 2</h2>
-      <p class="sub">Programme à venir.</p>
+      <p class="meta"><span class="tag">Jeudi 26 novembre · Thanksgiving</span> Jour 2</p>
+      <h2>Course, Thanksgiving et Skydeck</h2>
+      <p class="sub">Lincoln Park le matin, puis le Loop et la Willis Tower.</p>
     </header>
     <div class="body">
-      <dl class="slots">
-        <dt>Matin</dt><dd class="todo">À venir</dd>
-        <dt>Midi</dt><dd class="todo">À venir</dd>
-        <dt>Après-midi</dt><dd class="todo">À venir</dd>
-        <dt>Soir</dt><dd class="todo">À venir</dd>
-      </dl>
+      <dl class="stats"><div><dt>Course</dt><dd>9 h 00</dd></div><div><dt>Skydeck</dt><dd>15 h 30</dd></div><div><dt>Coucher soleil</dt><dd>≈ 16 h 20</dd></div></dl>
+      <ol class="timeline">
+        <li><time>7 h 15 – 10 h 30</time><div><b>Turkey Trot Chicago</b>Retrait du dossard de 7 h à 8 h 45, départ à <b style="display:inline">9 h</b> près de Diversey Harbor. Arrivée vers 9 h 30 – 9 h 45 pour un 5 km, 9 h 45 – 10 h pour un 8 km. Y aller en bus CTA 151 : c'est trop loin pour faire l'aller à pied. <a class="ext" href="https://www.turkeytrotchicago.com" target="_blank" rel="noopener">Site de la course ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Diversey+Harbor%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Diversey Harbor</a></span></div></li>
+        <li><time>11 h 00</time><div><b>Retour à l'hôtel</b>Douche et on se pose un peu.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
+        <li><time>12 h 15 – 14 h 00</time><div><b>Christkindlmarket</b>Marché de Noël à Daley Plaza : stands, déco et spécialités. Parfait pour un déjeuner léger. Ouvert de 11 h à 16 h le jour de Thanksgiving. <a class="ext" href="https://www.christkindlmarket.com" target="_blank" rel="noopener">Christkindlmarket ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Richard+J.+Daley+Center%2C+50+W+Washington+St%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Daley Plaza</a></span></div></li>
+        <li><time>15 h 30 – 17 h 15</time><div><b>Skydeck Chicago</b>Le gros moment du jeudi : 103e étage de la Willis Tower et les balcons en verre du Ledge. On arrive à 15 h 30 pour avoir de la marge avant le coucher du soleil (≈ 16 h 20) : Chicago de jour, puis la ville qui s'allume. À 10 – 15 min à pied de Daley Plaza. <a class="ext" href="https://theskydeck.com" target="_blank" rel="noopener">Billets Skydeck ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Skydeck+Chicago%2C+233+S+Wacker+Dr%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Skydeck</a></span></div></li>
+        <li><time>18 h 30 – 20 h 00</time><div><b>Dîner de Thanksgiving</b>Un vrai dîner américain de Thanksgiving, dans le centre pour ne pas reprendre la voiture. <b style="display:inline">À réserver à l'avance.</b></div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="day" id="ven" data-date="" style="--c: var(--d3)">
+  <section class="day" id="ven-27" data-date="2026-11-27" style="--c: var(--d3)">
     <header>
-      <p class="meta"><span class="tag">Chicago</span> Vendredi · Jour 3</p>
-      <h2>Journée 3</h2>
-      <p class="sub">Programme à venir.</p>
+      <p class="meta"><span class="tag">Vendredi 27 novembre</span> Jour 3</p>
+      <h2>Nutella Café, Route 66 et croisière</h2>
+      <p class="sub">Millennium Park, le Loop et la Chicago River. Journée 100 % à pied.</p>
     </header>
     <div class="body">
-      <dl class="slots">
-        <dt>Matin</dt><dd class="todo">À venir</dd>
-        <dt>Midi</dt><dd class="todo">À venir</dd>
-        <dt>Après-midi</dt><dd class="todo">À venir</dd>
-        <dt>Soir</dt><dd class="todo">À venir</dd>
-      </dl>
+      <dl class="stats"><div><dt>Croisière</dt><dd>14 h 30</dd></div><div><dt>Rooftop</dt><dd>17 h 00</dd></div><div><dt>Transport</dt><dd>À pied</dd></div></dl>
+      <ol class="timeline">
+        <li><time>8 h 45 – 9 h 45</time><div><b>Petit-déj au Nutella Café</b>Crêpes, gaufres ou French toast au Nutella. ≈ 20 min à pied de l'hôtel.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Nutella+Cafe+Chicago%2C+189+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Nutella Café</a></span></div></li>
+        <li><time>10 h 00 – 10 h 45</time><div><b>Millennium Park et The Bean</b>Photos devant The Bean (Cloud Gate). 5 – 10 min à pied.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Cloud+Gate%2C+Millennium+Park%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 The Bean</a></span></div></li>
+        <li><time>10 h 50 – 11 h 00</time><div><b>Panneau « Historic Route 66 Begin »</b>Le point de départ de la Route 66, à l'angle d'Adams Street et Michigan Avenue.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Historic+Route+66+Begin+Sign%2C+E+Adams+St+%26+S+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Route 66</a></span></div></li>
+        <li><time>11 h 00 – 12 h 45</time><div><b>Art Institute of Chicago</b>Juste en face, 2 min à pied.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Art+Institute+of+Chicago%2C+111+S+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Art Institute</a></span></div></li>
+        <li><time>12 h 45 – 14 h 00</time><div><b>Déjeuner dans le Loop</b>Puis balade tranquille vers la rivière (10 – 20 min).</div></li>
+        <li><time>14 h 30 – 15 h 30</time><div><b>Croisière architecturale</b>Sur la Chicago River, embarcadère à Michigan Avenue. Version hiver d'environ 60 min, de jour pour bien voir les bâtiments. Départs Shoreline annoncés à 11 h 30, 13 h, 14 h 30 et 16 h : <b style="display:inline">à confirmer sur le site officiel avant d'acheter.</b> <a class="ext" href="https://shorelinesightseeing.com" target="_blank" rel="noopener">Shoreline ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Shoreline+Sightseeing%2C+Michigan+Ave+Bridge%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Embarcadère</a></span></div></li>
+        <li><time>16 h 00 – 16 h 45</time><div><b>Chicago Riverwalk</b>Les ponts et les gratte-ciel en photo. Coucher du soleil à 16 h 21.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Riverwalk%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Riverwalk</a></span></div></li>
+        <li><time>17 h 00 – 18 h 00</time><div><b>LH Rooftop au LondonHouse</b>La ville illuminée d'en haut. Ouvert tous les jours jusqu'à minuit, on peut profiter de la vue sans réserver d'igloo selon l'affluence. <a class="ext" href="https://londonhousechicago.com" target="_blank" rel="noopener">LondonHouse ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=LondonHouse+Chicago%2C+85+E+Wacker+Dr%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 LondonHouse</a></span></div></li>
+        <li><time>18 h 30 – 20 h 00</time><div><b>Dîner dans River North</b>10 – 20 min à pied, pas loin de l'hôtel.</div></li>
+      </ol>
+      <details class="plan-b"><summary>Plan B si la croisière Shoreline n'est pas dispo</summary>
+        <p class="note">Wendella fait des croisières architecturales toute l'année, avec bateaux chauffés et circuits de 45 ou 90 min. Pas inclus dans le C3 CityPASS. <a class="ext" href="https://wendellaboats.com" target="_blank" rel="noopener">Wendella ↗</a></p>
+      </details>
     </div>
   </section>
 
-  <section class="day" id="sam" data-date="" style="--c: var(--d4)">
+  <section class="day" id="sam-28" data-date="2026-11-28" style="--c: var(--d4)">
     <header>
-      <p class="meta"><span class="tag">Chicago</span> Samedi · Jour 4</p>
-      <h2>Journée 4</h2>
-      <p class="sub">Programme à venir.</p>
+      <p class="meta"><span class="tag">Samedi 28 novembre</span> Jour 4</p>
+      <h2>Magnificent Mile, plage et Navy Pier</h2>
+      <p class="sub">Magnificent Mile, Gold Coast, Streeterville et Navy Pier. Surtout à pied.</p>
     </header>
     <div class="body">
-      <dl class="slots">
-        <dt>Matin</dt><dd class="todo">À venir</dd>
-        <dt>Midi</dt><dd class="todo">À venir</dd>
-        <dt>Après-midi</dt><dd class="todo">À venir</dd>
-        <dt>Soir</dt><dd class="todo">À venir</dd>
-      </dl>
+      <dl class="stats"><div><dt>Roastery</dt><dd>15 h 00</dd></div><div><dt>Feu d'artifice</dt><dd>20 h 00</dd></div><div><dt>Navy Pier</dt><dd>Gratuit</dd></div></dl>
+      <ol class="timeline">
+        <li><time>9 h 30 – 10 h 30</time><div><b>Petit-déj tranquille</b>Près de l'hôtel.</div></li>
+        <li><time>10 h 45 – 12 h 30</time><div><b>Magnificent Mile</b>Shopping, grandes enseignes et la Water Tower. 10 – 15 min à pied de l'hôtel.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Magnificent+Mile%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Magnificent Mile</a> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Water+Tower%2C+806+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Water Tower</a></span></div></li>
+        <li><time>12 h 30 – 13 h 15</time><div><b>Oak Street Beach</b>Promenade et photos au bord du lac Michigan.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Oak+Street+Beach%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Oak Street Beach</a></span></div></li>
+        <li><time>13 h 15 – 14 h 30</time><div><b>Déjeuner dans le coin</b></div></li>
+        <li><time>15 h 00 – 16 h 00</time><div><b>Goûter au Starbucks Reserve Roastery</b>Le plus grand Starbucks du monde, sur plusieurs étages.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Starbucks+Reserve+Roastery%2C+646+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Roastery</a></span></div></li>
+        <li><time>16 h 00 – 17 h 30</time><div><b>Streeterville</b>Retour tranquille, magasins et décorations de Noël.</div></li>
+        <li><time>17 h 30 – 19 h 00</time><div><b>Dîner : deep-dish pizza</b>La vraie pizza de Chicago. Resto à choisir dans le coin.</div></li>
+        <li><time>19 h 15 – 20 h 30</time><div><b>Navy Pier et feu d'artifice</b>Feu d'artifice officiellement prévu à <b style="display:inline">20 h</b>. Entrée gratuite. 20 – 30 min à pied selon le resto. <a class="ext" href="https://navypier.org" target="_blank" rel="noopener">Navy Pier ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Navy+Pier%2C+600+E+Grand+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Navy Pier</a></span></div></li>
+      </ol>
+      <details class="plan-b"><summary>Option : ZooLights au Lincoln Park Zoo</summary>
+        <p class="note">Pour plus d'ambiance de Noël, on peut remplacer le créneau 16 h – 17 h 30 par les illuminations du zoo. Ouverture à 16 h 30, billets 7 – 12 $ en prévente. C'est loin du reste du parcours : bus obligatoire pour rejoindre Navy Pier ensuite. À garder facultatif. <a class="ext" href="https://www.lpzoo.org" target="_blank" rel="noopener">Lincoln Park Zoo ↗</a> <span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Lincoln+Park+Zoo%2C+2001+N+Clark+St%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Lincoln Park Zoo</a></span></p>
+      </details>
     </div>
   </section>
 
-  <section class="day" id="dim" data-date="" style="--c: var(--d5)">
+  <section class="day" id="dim-29" data-date="2026-11-29" style="--c: var(--d5)">
     <header>
-      <p class="meta"><span class="tag">Chicago</span> Dimanche · Jour 5</p>
-      <h2>Départ</h2>
-      <p class="sub">Dernière balade, puis direction l'aéroport.</p>
+      <p class="meta"><span class="tag">Dimanche 29 novembre</span> Jour 5</p>
+      <h2>Retour à Pittsburgh</h2>
+      <p class="sub">Journée simple, sans billet ni visite à heure fixe. Horaires à l'heure de Chicago.</p>
     </header>
     <div class="body">
-      <dl class="slots">
-        <dt>Matin</dt><dd class="todo">À venir</dd>
-        <dt>Midi</dt><dd class="todo">À venir</dd>
-        <dt>Après-midi</dt><dd class="todo">À venir</dd>
-        <dt>Soir</dt><dd class="todo">À venir</dd>
-      </dl>
+      <div class="info key"><span class="ico" aria-hidden="true">🚗</span><div><b>Partir vers 12 h 30 max</b>Le dimanche après Thanksgiving, les autoroutes sont très chargées. Compte 8 à 10 h avec les pauses, donc une arrivée vers 21 h 30 – 23 h 30 à Pittsburgh (heure de Pittsburgh, 1 h de plus qu'à Chicago).</div></div>
+      <ol class="timeline">
+        <li><time>8 h 30 – 9 h 30</time><div><b>Petit-déj</b></div></li>
+        <li><time>9 h 30 – 10 h 30</time><div><b>Petite balade dans River North</b></div></li>
+        <li><time>10 h 30 – 11 h 00</time><div><b>Check-out et on récupère la voiture</b><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
+        <li><time>11 h 00 – 12 h 00</time><div><b>Dernier repas léger</b>Ou des provisions pour la route.</div></li>
+        <li><time>12 h 00 – 12 h 30</time><div><b>Départ vers Pittsburgh</b><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Pittsburgh%2C+PA" target="_blank" rel="noopener">📍 Pittsburgh</a></span></div></li>
+      </ol>
     </div>
   </section>
 
@@ -299,17 +327,17 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 <section class="practical" id="infos">
   <h2>Infos pratiques</h2>
   <div class="grid">
-    <div class="card"><h3>Logement</h3><p class="todo">Adresse à ajouter.</p></div>
-    <div class="card"><h3>Vols</h3><p class="todo">Aller (mercredi) et retour (dimanche) : numéros de vol à ajouter.</p></div>
-    <div class="card"><h3>La bande</h3><p class="todo">Qui vient : à ajouter.</p></div>
-    <div class="card"><h3>Se déplacer</h3><p>Le métro de Chicago, c'est le « L » (CTA). Ventra marche directement avec une carte bancaire sans contact.</p></div>
+    <div class="card"><h3>À réserver maintenant</h3><ul class="checks"><li><label><input type="checkbox" data-k="r0"><span>Skydeck jeudi 26 novembre à 15 h 30</span></label></li><li><label><input type="checkbox" data-k="r1"><span>Croisière Shoreline vendredi 27 à 14 h 30 (si le créneau est confirmé)</span></label></li><li><label><input type="checkbox" data-k="r2"><span>Dîner de Thanksgiving jeudi soir</span></label></li><li><label><input type="checkbox" data-k="r3"><span>Comparer les billets séparés avant d'acheter le C3 CityPASS</span></label></li><li><label><input type="checkbox" data-k="r4"><span>Confirmer le retrait du dossard jeudi matin</span></label></li></ul><p class="note">Les cases cochées restent enregistrées sur ton téléphone uniquement.</p></div>
+    <div class="card"><h3>Chicago C3 CityPASS</h3><p class="price">109 $ <span class="note">/ personne</span></p><p>Skydeck + croisière Shoreline + Art Institute. 218 $ pour nous deux.</p><p class="note">À comparer avec les billets séparés (≈ 103 $ minimum selon les créneaux). Il faut ensuite réserver le Skydeck et Shoreline après l'achat.</p><p><a class="ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener">Voir le C3 CityPASS ↗</a></p></div>
+    <div class="card"><h3>Hôtel</h3><p><b>Ohio House Motel</b>, 600 N LaSalle Dr, Chicago, IL 60654. Du mercredi 25 au dimanche 29.</p><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div>
+    <div class="card"><h3>Se déplacer</h3><p>Presque tout se fait à pied. Pour les quelques bus (course du jeudi, ZooLights), on paie directement avec une carte sans contact : pas besoin de pass CTA.</p></div>
     <div class="card"><h3>Numéros utiles</h3><p>Urgences aux États-Unis : <b>911</b>.</p></div>
-    <div class="card"><h3>Décalage horaire</h3><p>Chicago a 7 h de moins que la France.</p></div>
+    <div class="card"><h3>Décalage horaire</h3><p>Chicago a 1 h de moins que Pittsburgh et 7 h de moins que la France.</p></div>
   </div>
   <a class="top-link" href="#haut">↑ Retour en haut</a>
 </section>
 
-<footer>Programme détaillé à venir, jour par jour.</footer>
+<footer>Bon voyage à Chicago 🦃</footer>
 </div>
 
 <script>
@@ -340,6 +368,13 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
   btn.querySelector("a").setAttribute("href", "#" + sec.id);
   btn.classList.add("show");
 })();
+(function () {{
+  document.querySelectorAll('.checks input').forEach(function (cb) {{
+    var k = 'chi-' + cb.dataset.k;
+    try {{ cb.checked = localStorage.getItem(k) === '1'; }} catch (e) {{}}
+    cb.addEventListener('change', function () {{ try {{ localStorage.setItem(k, cb.checked ? '1' : '0'); }} catch (e) {{}} }});
+  }});
+}})();
 </script>
 </body>
 </html>
