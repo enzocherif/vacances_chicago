@@ -6,185 +6,164 @@
 <title>Chicago à Thanksgiving</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <style>
-/* Layout : même carnet de voyage que le road trip famille. En-tête, bandeau des jours collant, une fiche par jour avec une frise horaire. */
+/* Style inspiré d'Apple : typo système (SF Pro sur iPhone/Mac, Inter ailleurs), couleurs système iOS, cartes groupées, barre des jours en verre dépoli. */
 :root {
-  --bg: #eef1f5;
-  --surface: #ffffff;
-  --soft: #f4f6f9;
-  --ink: #141b29;
-  --muted: #5a6476;
-  --line: #dfe3ea;
-  --accent: #1d4ed8;
-  --hero: #0f2741;
-  --hero-ink: #f4f6fb;
-  --d1: #41b6e6;
-  --d2: #e4002b;
-  --d3: #e0a100;
-  --d4: #2f8f6b;
-  --d5: #7a5cd6;
-  --chip-ink: #141b29;
-  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #f5f5f7; --surface: #ffffff; --soft: #f2f2f7; --ink: #1d1d1f; --muted: #6e6e73; --line: rgba(60,60,67,.14);
+  --accent: #0071e3; --glass: rgba(245,245,247,.78);
+  --d1: #007aff; --d2: #ff3b30; --d3: #ff9500; --d4: #34c759; --d5: #af52de;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Helvetica Neue", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0e1219; --surface: #171d27; --soft: #1f2632; --ink: #eef1f6; --muted: #a3acbb; --line: #2a3240;
-    --accent: #8aa9ff; --hero: #1b2a4a; --hero-ink: #f4f6fb;
-    --d1: #7fd0f2; --d2: #ef6a6d; --d3: #f2bd3a; --d4: #4fc196; --d5: #a48cf0; --chip-ink: #0e1219;
-    color-scheme: dark;
+    --bg: #000000; --surface: #1c1c1e; --soft: #2c2c2e; --ink: #f5f5f7; --muted: #98989d; --line: rgba(84,84,88,.5);
+    --accent: #2997ff; --glass: rgba(0,0,0,.72);
+    --d1: #0a84ff; --d2: #ff453a; --d3: #ff9f0a; --d4: #30d158; --d5: #bf5af2;
+    --shadow: none; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0e1219; --surface: #171d27; --soft: #1f2632; --ink: #eef1f6; --muted: #a3acbb; --line: #2a3240;
-  --accent: #8aa9ff; --hero: #1b2a4a; --hero-ink: #f4f6fb;
-  --d1: #7fd0f2; --d2: #ef6a6d; --d3: #f2bd3a; --d4: #4fc196; --d5: #a48cf0; --chip-ink: #0e1219;
-  color-scheme: dark;
+  --bg: #000000; --surface: #1c1c1e; --soft: #2c2c2e; --ink: #f5f5f7; --muted: #98989d; --line: rgba(84,84,88,.5);
+  --accent: #2997ff; --glass: rgba(0,0,0,.72);
+  --d1: #0a84ff; --d2: #ff453a; --d3: #ff9f0a; --d4: #30d158; --d5: #bf5af2;
+  --shadow: none; color-scheme: dark;
 }
-
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 84px); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 78px); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
-  margin: 0;
-  background: var(--bg); color: var(--ink);
-  font-family: var(--font-body); font-size: 17px; line-height: 1.5;
-  -webkit-text-size-adjust: 100%;
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-size: 17px; line-height: 1.47; letter-spacing: -.022em;
+  -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
 }
-.wrap { max-width: 640px; margin: 0 auto; padding-inline: 16px; }
-a { color: var(--accent); }
-a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.12; }
+.wrap { max-width: 680px; margin: 0 auto; padding-inline: 16px; }
+a { color: var(--accent); text-decoration: none; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.1; letter-spacing: -.03em; }
 
-/* En-tête */
-.hero-band { background: var(--hero); color: var(--hero-ink); }
-.hero { padding-block: 28px 22px; }
-.eyebrow { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; opacity: .75; font-weight: 700; margin: 0 0 8px; }
-.hero h1 { font-size: clamp(32px, 9vw, 44px); font-weight: 800; letter-spacing: -.01em; }
-.hero .dates { margin: 10px 0 0; opacity: .85; }
-.route { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
-.route a {
-  display: block; text-decoration: none; color: var(--hero-ink);
-  padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.08);
-  border-top: 4px solid var(--c);
-}
-.route b { display: block; font-family: var(--font-display); font-size: 17px; }
-.route span { font-size: 14px; opacity: .8; }
-.today-btn { display: none; margin: 14px 0 0; }
+/* En-tête façon grand titre */
+.hero { padding-block: 44px 20px; }
+.eyebrow { font-size: 15px; font-weight: 600; color: var(--muted); margin: 0 0 6px; letter-spacing: -.01em; }
+.hero h1 { font-size: clamp(38px, 11vw, 56px); font-weight: 700; letter-spacing: -.04em; }
+.hero .dates { margin: 12px 0 0; color: var(--muted); font-size: 19px; line-height: 1.4; }
+.route { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
+.route a { display: block; padding: 12px 14px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); }
+.route b { display: flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 600; }
+.route b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+.route span { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; }
+.today-btn { display: none; margin: 16px 0 0; }
 .today-btn.show { display: block; }
-.today-btn a { display: block; text-align: center; padding: 13px; border-radius: 12px; background: var(--d1); color: var(--chip-ink); font-weight: 700; text-decoration: none; }
+.today-btn a { display: block; text-align: center; padding: 14px; border-radius: 980px; background: var(--accent); color: #fff; font-weight: 600; }
 
-/* Bandeau des jours */
+/* Barre des jours en verre dépoli */
 .days-nav {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
-  background: var(--bg); border-bottom: 1px solid var(--line);
-  box-shadow: 0 4px 12px -10px rgba(0,0,0,.35);
+  position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px);
+  background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: .5px solid var(--line);
 }
 .days-nav .scroller { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .days-nav .scroller::-webkit-scrollbar { display: none; }
-.days-nav ol { display: flex; gap: 6px; margin: 0 auto; padding: 10px 16px; list-style: none; width: max-content; }
-.days-nav a {
-  display: flex; flex-direction: column; align-items: center; min-width: 52px; padding: 5px 8px 6px;
-  border-radius: 12px; text-decoration: none; color: var(--ink); background: var(--surface);
-  border: 1px solid var(--line); box-shadow: inset 0 4px 0 var(--c);
-}
-.days-nav .wd { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin-top: 3px; }
-.days-nav .dn { font-family: var(--font-display); font-size: 21px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.days-nav a.is-current { border-color: var(--ink); }
-.days-nav a.is-today { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.days-nav a.is-today .wd { color: var(--bg); }
+.days-nav ol { display: flex; gap: 4px; margin: 0 auto; padding: 8px 16px; list-style: none; width: max-content; }
+.days-nav a { display: flex; flex-direction: column; align-items: center; min-width: 50px; padding: 5px 8px; border-radius: 12px; color: var(--ink); }
+.days-nav .wd { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
+.days-nav .dn { font-size: 20px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.days-nav a.is-current { background: var(--surface); box-shadow: var(--shadow); }
+.days-nav a.is-current .dn { color: var(--c); }
+.days-nav a.is-today { background: var(--c); color: #fff; }
+.days-nav a.is-today .wd, .days-nav a.is-today .dn { color: #fff; }
 
-/* Fiches jour */
-main { display: flex; flex-direction: column; gap: 20px; padding-block: 20px 8px; }
-.day { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
-.day header {
-  padding: 18px 16px 14px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 14%, var(--surface)), var(--surface));
-  border-top: 6px solid var(--c);
-}
-.day .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; margin: 0 0 8px; font-size: 14px; color: var(--muted); font-weight: 700; }
-.tag { background: var(--c); color: var(--chip-ink); padding: 2px 10px; border-radius: 999px; font-size: 13px; }
-.day h2 { font-size: 25px; font-weight: 800; }
-.day .sub { margin: 6px 0 0; color: var(--muted); }
-.day .body { padding: 6px 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+/* Cartes jour */
+main { display: flex; flex-direction: column; gap: 22px; padding-block: 22px 8px; }
+.day { background: var(--surface); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+.day header { padding: 22px 18px 10px; }
+.day .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0 0 6px; font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
+.tag { color: var(--c); }
+.day h2 { font-size: 28px; font-weight: 700; }
+.day .sub { margin: 8px 0 0; color: var(--muted); }
+.day .body { padding: 8px 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+.day .body h3 { font-size: 21px; font-weight: 700; margin: 10px 0 -4px; }
 
 /* Chiffres clés */
 .stats { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.stats div { background: var(--soft); border-radius: 12px; padding: 8px 10px; min-width: 0; }
-.stats dt { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
-.stats dd { margin: 2px 0 0; font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stats div { background: var(--soft); border-radius: 14px; padding: 10px 12px; min-width: 0; }
+.stats dt { font-size: 12px; color: var(--muted); font-weight: 600; }
+.stats dd { margin: 2px 0 0; font-weight: 700; font-size: 17px; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--ink); }
 
 /* Frise horaire */
-.timeline { list-style: none; margin: 4px 0 0; padding: 0; }
-.timeline li { position: relative; padding: 0 0 18px 26px; }
-.timeline li::before {
-  content: ""; position: absolute; left: 0; top: 5px; width: 12px; height: 12px; border-radius: 50%;
-  background: var(--surface); border: 3px solid var(--c, var(--accent));
-}
-.timeline li::after { content: ""; position: absolute; left: 5px; top: 20px; bottom: 0; width: 2px; background: var(--line); }
+.timeline { list-style: none; margin: 2px 0 0; padding: 0; }
+.timeline li { position: relative; padding: 0 0 18px 24px; }
+.timeline li::before { content: ""; position: absolute; left: 1px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--accent)); }
+.timeline li::after { content: ""; position: absolute; left: 5.5px; top: 22px; bottom: 2px; width: 1px; background: var(--line); }
 .timeline li:last-child { padding-bottom: 0; }
 .timeline li:last-child::after { display: none; }
-.timeline time { display: block; font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.4; }
+.timeline time { display: block; font-weight: 600; font-size: 14px; color: var(--c, var(--accent)); font-variant-numeric: tabular-nums; line-height: 1.5; }
 .timeline li div { min-width: 0; color: var(--muted); font-size: 16px; }
-.timeline b { display: block; color: var(--ink); font-size: 17px; margin-bottom: 2px; }
+.timeline b { display: block; color: var(--ink); font-size: 17px; font-weight: 600; margin-bottom: 1px; }
 
-/* Créneaux simples (jours pas encore détaillés) */
 .slots { margin: 0; display: grid; grid-template-columns: 6.2em minmax(0, 1fr); gap: 10px 12px; }
-.slots dt { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--muted); padding-top: 1px; }
+.slots dt { font-weight: 600; color: var(--muted); }
 .slots dd { margin: 0; min-width: 0; }
 .todo { color: var(--muted); font-style: italic; }
 
-/* Boutons Google Maps */
+/* Boutons Plans */
 .maps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.map {
-  display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px 5px 8px; border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent);
-  font-size: 14px; font-weight: 700; text-decoration: none; line-height: 1.25; white-space: nowrap;
-}
+.map { display: inline-flex; align-items: center; gap: 4px; padding: 5px 11px 5px 9px; border-radius: 980px; background: var(--soft); color: var(--accent); font-size: 14px; font-weight: 600; line-height: 1.25; white-space: nowrap; }
 
 /* Encadrés */
-.info { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--soft); font-size: 15px; }
-.info b { display: block; font-size: 16px; }
-.info .ico { font-size: 18px; line-height: 1.3; flex: none; width: 22px; text-align: center; }
+.info { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--soft); font-size: 15px; color: var(--muted); }
+.info b { display: block; font-size: 16px; color: var(--ink); font-weight: 600; }
+.info .ico { font-size: 20px; line-height: 1.2; flex: none; width: 24px; text-align: center; }
 .info > div { min-width: 0; }
-.info.key { background: color-mix(in srgb, var(--c) 16%, var(--surface)); }
+.info.key { background: color-mix(in srgb, var(--c) 12%, var(--surface)); }
 .note { margin: 0; font-size: 15px; color: var(--muted); }
 
-/* Menus dépliants */
-.plan-b { border: 1px solid var(--line); border-radius: 14px; padding: 0 14px; }
-.plan-b summary { cursor: pointer; font-weight: 700; padding: 13px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+/* Menus dépliants façon iOS */
+.plan-b { background: var(--soft); border-radius: 16px; padding: 0 16px; }
+.plan-b summary { cursor: pointer; font-weight: 600; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 .plan-b summary::-webkit-details-marker { display: none; }
-.plan-b summary::after { content: "+"; font-family: var(--font-display); font-size: 22px; line-height: 1; color: var(--accent); flex: none; }
-.plan-b[open] summary::after { content: "–"; }
-.plan-b .slots, .plan-b .timeline { padding-bottom: 14px; }
+.plan-b summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .2s; flex: none; margin-right: 4px; }
+.plan-b[open] summary::after { transform: rotate(45deg); }
+.plan-b .slots, .plan-b .timeline, .plan-b > .note { padding-bottom: 16px; }
+.plan-b .timeline li div { font-size: 15px; }
+
+/* Le plan d'Enzo, en petit */
+.mini { border: .5px solid var(--line); border-radius: 16px; padding: 12px 14px; font-size: 14px; color: var(--muted); }
+.mini > b { display: block; color: var(--ink); font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.mini ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; }
+.mini li { display: contents; }
+.mini time { font-weight: 600; color: var(--c); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mini .maps { margin-top: 8px; }
+.mini .map { font-size: 13px; padding: 4px 10px 4px 8px; }
 
 /* Infos pratiques */
-.practical { padding-block: 14px 8px; }
-.practical h2 { font-size: 25px; margin: 0 0 12px; }
-.practical .grid { display: flex; flex-direction: column; gap: 10px; }
-.practical .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 15px; display: flex; flex-direction: column; gap: 4px; }
-.practical h3 { font-size: 17px; }
+.practical { padding-block: 22px 8px; }
+.practical h2 { font-size: 28px; font-weight: 700; margin: 0 0 14px; }
+.practical .grid { display: flex; flex-direction: column; gap: 12px; }
+.practical .card { background: var(--surface); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; box-shadow: var(--shadow); }
+.practical h3 { font-size: 19px; font-weight: 700; }
 .practical p { margin: 0; }
-.top-link { display: inline-block; margin: 14px 0 0; font-weight: 700; }
-footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
-.table-wrap { overflow-x: auto; padding-bottom: 8px; }
+.top-link { display: inline-block; margin: 18px 0 0; font-weight: 600; }
+footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-align: center; }
+.table-wrap { overflow-x: auto; }
 .dist { width: 100%; border-collapse: collapse; font-size: 15px; }
-.dist td { padding: 7px 0; border-top: 1px solid var(--line); vertical-align: top; }
-.dist td + td { text-align: right; white-space: nowrap; padding-left: 12px; font-variant-numeric: tabular-nums; font-weight: 700; }
+.dist td { padding: 9px 0; border-top: .5px solid var(--line); vertical-align: top; }
+.dist td + td { text-align: right; white-space: nowrap; padding-left: 12px; font-variant-numeric: tabular-nums; font-weight: 600; }
 .dist tr:first-child td { border-top: 0; }
-.dist .total td { font-weight: 800; border-top: 2px solid var(--ink); }
-.plan-b > .note { padding-bottom: 14px; }
+.dist .total td { font-weight: 700; color: var(--accent); }
 .plan-b .slots dd b { display: inline; }
 
-/* Checklist de réservation */
-.checks { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.checks label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; }
-.checks input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
-.checks input:checked + span { text-decoration: line-through; color: var(--muted); }
-.price { font-family: var(--font-display); font-weight: 800; font-size: 28px; line-height: 1.1; }
-.ext { font-weight: 700; }
-.day .body h3 { font-size: 19px; margin: 8px 0 -4px; }
+/* Checklist */
+.checks { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; }
+.checks li + li { border-top: .5px solid var(--line); }
+.checks label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; padding: 10px 0; }
+.checks input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin: 1px 0 0; border-radius: 50%; border: 1.5px solid var(--muted); flex: none; display: grid; place-content: center; cursor: pointer; }
+.checks input:checked { background: var(--d4); border-color: var(--d4); }
+.checks input:checked::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.checks input:checked + span { color: var(--muted); text-decoration: line-through; }
+.price { font-weight: 700; font-size: 34px; line-height: 1.1; letter-spacing: -.03em; }
+.ext { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -192,7 +171,7 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 <div class="hero-band">
 <div class="wrap">
   <header class="hero">
-    <p class="eyebrow">Avec Noé · Thanksgiving 2026</p>
+    <p class="eyebrow">Enzo, Noé, Baptiste et Vaiana · Thanksgiving 2026</p>
     <h1 id="haut">Chicago à Thanksgiving</h1>
     <p class="dates">Du mercredi 25 au dimanche 29 novembre 2026. 5 jours, 4 nuits à l'Ohio House, presque tout à pied.</p>
     <ul class="route" aria-label="Programme">
@@ -246,31 +225,34 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
     </header>
     <div class="body">
       <dl class="stats"><div><dt>Course</dt><dd>9 h 00</dd></div><div><dt>Skydeck</dt><dd>15 h 30</dd></div><div><dt>Dîner</dt><dd>18 h 00</dd></div></dl>
-      <div class="info key"><span class="ico" aria-hidden="true">🚌</span><div><b>Bus le jour de Thanksgiving</b>La CTA roule avec les horaires du dimanche. Vérifier la veille le passage exact du bus 151.</div></div>
       <h3>Le matin : Turkey Trot</h3>
-      <div class="info"><span class="ico" aria-hidden="true">🏃</span><div><b>Seul Enzo court</b>Deux options pour Noé : venir encourager, ou faire la grasse mat' et se retrouver à l'hôtel vers 11 h.</div></div>
-      <details class="plan-b" open><summary>Option 1 : Noé vient encourager</summary>
+      <div class="info"><span class="ico" aria-hidden="true">🏃</span><div><b>Enzo court, les autres ont le choix</b>Pendant la course, Noé, Baptiste et Vaiana peuvent faire la grasse mat' ou venir encourager. Tout le monde se retrouve à l'hôtel vers 11 h.</div></div>
+      <div class="mini"><b>Le plan d'Enzo</b><ol>
+        <li><time>7 h 00</time><span>Départ de l'hôtel, 10 – 12 min à pied</span></li>
+        <li><time>7 h 15</time><span>Bus CTA 151 nord à Michigan &amp; Ontario (20 – 30 min)</span></li>
+        <li><time>7 h 45</time><span>Descente à Sheridan &amp; Diversey, 15 – 20 min à pied</span></li>
+        <li><time>8 h 00</time><span>Dossard au 2601 N Cannon Dr (retrait 7 h – 8 h 45)</span></li>
+        <li><time>9 h 00</time><span>Départ du 5K ou du 8K, arrivée vers 9 h 25 – 10 h</span></li>
+        <li><time>11 h 00</time><span>Retour à l'hôtel, douche</span></li>
+      </ol><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=N+Michigan+Ave+%26+E+Ontario+St%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Arrêt Michigan & Ontario</a> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=2601+N+Cannon+Dr%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Turkey Trot</a></span> <a class="ext" href="https://www.turkeytrotchicago.com" target="_blank" rel="noopener">Site de la course ↗</a></div>
+      <details class="plan-b" open><summary>Option 1 : grasse mat' et brunch</summary>
       <ol class="timeline">
-        <li><time>7 h 00</time><div><b>Départ de l'hôtel ensemble</b>10 – 12 min à pied jusqu'à l'arrêt Michigan & Ontario.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
-        <li><time>7 h 15</time><div><b>Bus CTA 151 direction nord</b>Depuis Michigan & Ontario, environ 20 – 30 min de bus.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=N+Michigan+Ave+%26+E+Ontario+St%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Arrêt Michigan & Ontario</a></span></div></li>
-        <li><time>7 h 45 – 8 h 00</time><div><b>Descente à Sheridan & Diversey</b>Puis 15 – 20 min de marche jusqu'à la course.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=N+Sheridan+Rd+%26+W+Diversey+Pkwy%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Sheridan & Diversey</a></span></div></li>
-        <li><time>8 h 00 – 8 h 20</time><div><b>Retrait du dossard</b>Au 2601 N Cannon Drive (retrait de 7 h à 8 h 45). Noé garde les affaires. <a class="ext" href="https://www.turkeytrotchicago.com" target="_blank" rel="noopener">Site de la course ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=2601+N+Cannon+Dr%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Turkey Trot</a></span></div></li>
-        <li><time>8 h 30 – 8 h 50</time><div><b>Échauffement et placement</b>Noé se place près de l'arrivée pour les photos.</div></li>
-        <li><time>9 h 00</time><div><b>Départ du 5K ou du 8K</b>Pendant la course, Noé peut faire un tour au bord du lac à Diversey Harbor.</div></li>
-        <li><time>9 h 25 – 10 h 00</time><div><b>Arrivée, médaille et photos</b></div></li>
-        <li><time>10 h 00 – 10 h 15</time><div><b>Retour vers le bus</b>15 – 20 min à pied jusqu'au bus. Compter 45 – 60 min porte à porte.</div></li>
-        <li><time>11 h 00 – 12 h 00</time><div><b>Hôtel : douche et repos</b><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
+        <li><time>Jusqu'à 9 h 30</time><div><b>Grasse mat'</b>On récupère du voyage de la veille.</div></li>
+        <li><time>9 h 30 – 10 h 30</time><div><b>Petit-déj tranquille</b>Dans un café de River North, près de l'hôtel.</div></li>
+        <li><time>10 h 30 – 11 h 00</time><div><b>Petite balade au bord de la rivière</b>Le Riverwalk est à 10 min de l'hôtel.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Riverwalk%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Riverwalk</a></span></div></li>
+        <li><time>11 h 00</time><div><b>Retour à l'hôtel</b>On retrouve Enzo, puis départ tous ensemble vers le marché à midi.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
       </ol>
       </details>
-      <details class="plan-b"><summary>Option 2 : Enzo y va seul</summary>
-        <p class="note"><b style="display:inline;color:var(--ink)">Enzo :</b> même trajet que l'option 1 (départ 7 h, bus 151, course à 9 h), retour à l'hôtel vers 11 h.</p>
+      <details class="plan-b"><summary>Option 2 : venir encourager Enzo</summary>
       <ol class="timeline">
-        <li><time>7 h 00</time><div><b>Noé : grasse mat'</b></div></li>
-        <li><time>9 h 30 – 10 h 30</time><div><b>Noé : petit-déj tranquille</b>Dans un café près de l'hôtel, dans River North.</div></li>
-        <li><time>10 h 30 – 11 h 00</time><div><b>Noé : petite balade</b>Le long de la rivière, à 10 min de l'hôtel.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Riverwalk%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Riverwalk</a></span></div></li>
-        <li><time>11 h 00</time><div><b>On se retrouve à l'hôtel</b>Douche pour Enzo, puis départ ensemble vers le marché à midi.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
+        <li><time>8 h 00</time><div><b>Départ de l'hôtel</b>Une heure après Enzo : 10 – 12 min à pied jusqu'à l'arrêt Michigan & Ontario.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=N+Michigan+Ave+%26+E+Ontario+St%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Arrêt Michigan & Ontario</a></span></div></li>
+        <li><time>8 h 15</time><div><b>Bus CTA 151 direction nord</b>Descente à Sheridan & Diversey, puis 15 – 20 min à pied.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=N+Sheridan+Rd+%26+W+Diversey+Pkwy%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Sheridan & Diversey</a></span></div></li>
+        <li><time>9 h 00</time><div><b>Le départ, puis on se place à l'arrivée</b>Balade au bord du lac à Diversey Harbor pendant la course.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=2601+N+Cannon+Dr%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Turkey Trot</a></span></div></li>
+        <li><time>9 h 25 – 10 h 00</time><div><b>Arrivée d'Enzo</b>Photos et médaille, puis retour tous ensemble en bus.</div></li>
+        <li><time>11 h 00</time><div><b>Retour à l'hôtel</b><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
       </ol>
       </details>
+      <div class="info"><span class="ico" aria-hidden="true">🚌</span><div><b>Bus le jour de Thanksgiving</b>La CTA roule avec les horaires du dimanche. Vérifier la veille le passage exact du bus 151. Paiement par carte sans contact.</div></div>
       <h3>L'après-midi : marché de Noël et Skydeck</h3>
       <ol class="timeline">
         <li><time>12 h 00 – 12 h 25</time><div><b>Hôtel → Christkindlmarket</b>20 – 25 min à pied vers le Loop.</div></li>
@@ -282,11 +264,11 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
       <h3>Le soir : dîner de Thanksgiving</h3>
       <ol class="timeline">
         <li><time>17 h 15 – 17 h 30</time><div><b>Skydeck → Roanoke</b>10 – 15 min à pied.</div></li>
-        <li><time>18 h 00 – 19 h 30</time><div><b>Dîner chez Roanoke</b>Menu Thanksgiving en 3 services à <b style="display:inline">59 $ par personne</b> (dinde rôtie, farce aux champignons, légumes et dessert), taxes et pourboire en plus. Ouvert jusqu'à 20 h ce jeudi. Choisi plutôt que Volare car bien plus proche du Skydeck, pour éviter une longue marche après la course. <a class="ext" href="https://www.theroanokerestaurant.com/reservations" target="_blank" rel="noopener">Réserver chez Roanoke ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Roanoke+Restaurant%2C+135+W+Madison+St%2C+Chicago%2C+IL+60603" target="_blank" rel="noopener">📍 Roanoke</a></span></div></li>
+        <li><time>18 h 00 – 19 h 30</time><div><b>Dîner chez Roanoke</b>Table pour 4. Menu Thanksgiving en 3 services à <b style="display:inline">59 $ par personne</b> (dinde rôtie, farce aux champignons, légumes et dessert), taxes et pourboire en plus. Ouvert jusqu'à 20 h ce jeudi. Choisi plutôt que Volare car bien plus proche du Skydeck, pour éviter une longue marche après la course. <a class="ext" href="https://www.theroanokerestaurant.com/reservations" target="_blank" rel="noopener">Réserver chez Roanoke ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Roanoke+Restaurant%2C+135+W+Madison+St%2C+Chicago%2C+IL+60603" target="_blank" rel="noopener">📍 Roanoke</a></span></div></li>
         <li><time>19 h 30 – 19 h 55</time><div><b>Retour à l'Ohio House</b>20 – 25 min à pied, puis repos.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
       </ol>
       <details class="plan-b"><summary>Récap des déplacements</summary>
-        <div class="table-wrap"><table class="dist"><tr><td>Hôtel → course (Enzo, + Noé en option 1)<br><span class="note">Marche + bus</span></td><td>45 – 60 min</td></tr><tr><td>Course → hôtel<br><span class="note">Marche + bus</span></td><td>45 – 60 min</td></tr><tr><td>Hôtel → Christkindlmarket<br><span class="note">À pied</span></td><td>20 – 25 min</td></tr><tr><td>Christkindlmarket → Skydeck<br><span class="note">À pied</span></td><td>15 – 20 min</td></tr><tr><td>Skydeck → Roanoke<br><span class="note">À pied</span></td><td>10 – 15 min</td></tr><tr><td>Roanoke → hôtel<br><span class="note">À pied</span></td><td>20 – 25 min</td></tr><tr class="total"><td>Marche en centre-ville</td><td>≈ 1 h 10 – 1 h 25</td></tr></table></div>
+        <div class="table-wrap"><table class="dist"><tr><td>Hôtel → course (Enzo, + les autres en option 2)<br><span class="note">Marche + bus</span></td><td>45 – 60 min</td></tr><tr><td>Course → hôtel<br><span class="note">Marche + bus</span></td><td>45 – 60 min</td></tr><tr><td>Hôtel → Christkindlmarket<br><span class="note">À pied</span></td><td>20 – 25 min</td></tr><tr><td>Christkindlmarket → Skydeck<br><span class="note">À pied</span></td><td>15 – 20 min</td></tr><tr><td>Skydeck → Roanoke<br><span class="note">À pied</span></td><td>10 – 15 min</td></tr><tr><td>Roanoke → hôtel<br><span class="note">À pied</span></td><td>20 – 25 min</td></tr><tr class="total"><td>Marche en centre-ville</td><td>≈ 1 h 10 – 1 h 25</td></tr></table></div>
         <p class="note">Hors visite du marché, et sans compter la marche liée à la course et le 5K ou 8K.</p>
       </details>
       <div class="info"><span class="ico" aria-hidden="true">📌</span><div><b>À réserver</b>Skydeck à 15 h 30 et Roanoke vers 18 h. Ce sont les horaires visés, pas encore des places confirmées.</div></div>
@@ -313,7 +295,7 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
         <li><time>13 h 50 – 14 h 10</time><div><b>On rejoint le quai et on s'enregistre</b>401 N Michigan Avenue, quai au niveau de la rivière. 5 – 10 min.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Shoreline+Sightseeing%2C+401+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Quai Shoreline</a></span></div></li>
         <li><time>14 h 30 – 15 h 30</time><div><b>Croisière architecturale Shoreline</b>60 min en version hiver, sous les ponts avec les buildings vus depuis l'eau. Le départ de 14 h 30 apparaît pour le 27 novembre, mais <b style="display:inline">les places restent à valider</b>. <a class="ext" href="https://shorelinesightseeing.com" target="_blank" rel="noopener">Vérifier le départ de 14 h 30 ↗</a></div></li>
         <li><time>15 h 40 – 16 h 40</time><div><b>Chicago Riverwalk</b>Photos des ponts et des gratte-ciel. Coucher du soleil vers 16 h 20.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Riverwalk%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Riverwalk</a></span></div></li>
-        <li><time>17 h 00 – 18 h 00</time><div><b>LH Rooftop au LondonHouse</b>85 E Wacker Dr, 22e étage. Chicago illuminée, et le rooftop décoré pour Noël (Rudolph's Rooftop). On peut profiter de la vue sans réserver d'igloo selon l'affluence ; les igloos privés c'est 600 $ minimum, inutile pour nous deux. <a class="ext" href="https://londonhousechicago.com/rooftop/" target="_blank" rel="noopener">LondonHouse Rooftop ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=LondonHouse+Chicago%2C+85+E+Wacker+Dr%2C+Chicago%2C+IL+60601" target="_blank" rel="noopener">📍 LondonHouse</a></span></div></li>
+        <li><time>17 h 00 – 18 h 00</time><div><b>LH Rooftop au LondonHouse</b>85 E Wacker Dr, 22e étage. Chicago illuminée, et le rooftop décoré pour Noël (Rudolph's Rooftop). On peut profiter de la vue sans réserver d'igloo selon l'affluence ; les igloos privés c'est 600 $ minimum, inutile pour nous. <a class="ext" href="https://londonhousechicago.com/rooftop/" target="_blank" rel="noopener">LondonHouse Rooftop ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=LondonHouse+Chicago%2C+85+E+Wacker+Dr%2C+Chicago%2C+IL+60601" target="_blank" rel="noopener">📍 LondonHouse</a></span></div></li>
         <li><time>18 h 00 – 18 h 20</time><div><b>Retour vers River North et l'hôtel</b>15 – 20 min à pied.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div></li>
         <li><time>19 h 00</time><div><b>Dîner libre près de l'hôtel</b></div></li>
       </ol>
@@ -338,7 +320,7 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
         <li><time>9 h 45 – 10 h 05</time><div><b>Hôtel → Magnificent Mile</b>20 min à pied.</div></li>
         <li><time>10 h 05 – 11 h 45</time><div><b>Magnificent Mile</b>Michigan Avenue côté Chicago Avenue : boutiques du week-end du Black Friday, Water Tower Place et l'ancienne Chicago Water Tower. Le 360 CHICAGO est juste à côté, mais on a déjà le Skydeck jeudi : pas besoin d'un deuxième observatoire.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Chicago+Water+Tower%2C+806+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Water Tower</a> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Water+Tower+Place%2C+835+N+Michigan+Ave%2C+Chicago%2C+IL" target="_blank" rel="noopener">📍 Water Tower Place</a></span></div></li>
         <li><time>12 h 00 – 12 h 45</time><div><b>Oak Street Beach</b>Le lac Michigan d'un côté, les gratte-ciel de l'autre. Pour les photos et la balade, pas pour se baigner ! 10 – 15 min à pied.<span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Oak+Street+Beach%2C+Chicago%2C+IL+60611" target="_blank" rel="noopener">📍 Oak Street Beach</a></span></div></li>
-        <li><time>13 h 00 – 14 h 15</time><div><b>Deep-dish pizza chez Giordano's</b>730 N Rush St. Une petite pizza à partager suffit pour deux, c'est très copieux. Jusqu'à 45 min de cuisson plus l'attente d'une table : on peut réserver. <a class="ext" href="https://giordanos.com/locations/gold-coast-magnificent-mile/" target="_blank" rel="noopener">Voir et réserver Giordano's ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Giordano%27s%2C+730+N+Rush+St%2C+Chicago%2C+IL+60611" target="_blank" rel="noopener">📍 Giordano's</a></span></div></li>
+        <li><time>13 h 00 – 14 h 15</time><div><b>Deep-dish pizza chez Giordano's</b>730 N Rush St. C'est très copieux : deux pizzas à partager suffisent pour nous quatre. Jusqu'à 45 min de cuisson plus l'attente d'une table : on peut réserver. <a class="ext" href="https://giordanos.com/locations/gold-coast-magnificent-mile/" target="_blank" rel="noopener">Voir et réserver Giordano's ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Giordano%27s%2C+730+N+Rush+St%2C+Chicago%2C+IL+60611" target="_blank" rel="noopener">📍 Giordano's</a></span></div></li>
         <li><time>14 h 30 – 15 h 30</time><div><b>Goûter au Starbucks Reserve Roastery</b>646 N Michigan Ave. Cinq étages avec l'énorme installation de torréfaction. À tester : un café Reserve ou un affogato, et faire le tour des étages. Ouvert en général jusqu'à 22 h le samedi. 5 – 10 min à pied. <a class="ext" href="https://www.starbucksreserve.com/en-us/locations/chicago" target="_blank" rel="noopener">Site du Roastery ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Starbucks+Reserve+Roastery%2C+646+N+Michigan+Ave%2C+Chicago%2C+IL+60611" target="_blank" rel="noopener">📍 Roastery</a></span></div></li>
         <li><time>15 h 30 – 16 h 05</time><div><b>Starbucks → Navy Pier</b>30 – 35 min à pied, par les rues (voir l'alerte ci-dessus).</div></li>
         <li><time>16 h 05 – 18 h 00</time><div><b>Navy Pier</b>On arrive vers le coucher du soleil : le lac, la grande roue (en option) et l'ambiance de fête. <a class="ext" href="https://navypier.org" target="_blank" rel="noopener">Navy Pier ↗</a><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Navy+Pier%2C+600+E+Grand+Ave%2C+Chicago%2C+IL+60611" target="_blank" rel="noopener">📍 Navy Pier</a></span></div></li>
@@ -381,7 +363,7 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
       <div class="table-wrap"><table class="dist"><tr><td><b>Départ de Chicago</b></td><td>Arrivée à Pittsburgh</td></tr><tr><td>Départ 10 h 30</td><td>19 h 30 – 21 h 30</td></tr><tr class="total"><td>Départ 11 h 30</td><td>20 h 30 – 22 h 30</td></tr><tr><td>Départ 12 h 00</td><td>21 h 00 – 23 h 00</td></tr><tr><td>Départ 13 h 00</td><td>22 h 00 – 00 h 00</td></tr></table></div>
       <p class="note">Départs à l'heure de Chicago, arrivées à l'heure de Pittsburgh (1 h de plus). Ce sont des estimations, pas du trafic en direct.</p>
       <details class="plan-b"><summary>Péages et pauses</summary>
-        <p class="note">La route rapide passe par l'Indiana Toll Road et l'Ohio Turnpike, qui sont payants. Pour éviter les péages, vérifier l'alternative dans le GPS avant de partir : elle peut rallonger pas mal le trajet. Prévoir deux pauses pour manger, faire le plein et changer de conducteur si Noé conduit aussi.</p>
+        <p class="note">La route rapide passe par l'Indiana Toll Road et l'Ohio Turnpike, qui sont payants. Pour éviter les péages, vérifier l'alternative dans le GPS avant de partir : elle peut rallonger pas mal le trajet. Prévoir deux pauses pour manger, faire le plein et changer de conducteur.</p>
       </details>
       <p class="note"><a class="ext" href="https://www.google.com/maps/dir/?api=1&amp;origin=600+N+LaSalle+Dr%2C+Chicago%2C+IL&amp;destination=Pittsburgh%2C+PA&amp;travelmode=driving" target="_blank" rel="noopener">Itinéraire Google Maps ↗</a></p>
     </div>
@@ -392,8 +374,9 @@ footer { color: var(--muted); font-size: 14px; padding-block: 18px 36px; }
 <section class="practical" id="infos">
   <h2>Infos pratiques</h2>
   <div class="grid">
-    <div class="card"><h3>À réserver maintenant</h3><ul class="checks"><li><label><input type="checkbox" data-k="r0"><span>Skydeck jeudi 26 novembre à 15 h 30</span></label></li><li><label><input type="checkbox" data-k="r1"><span>Art Institute vendredi 27 à 11 h</span></label></li><li><label><input type="checkbox" data-k="r2"><span>Croisière Shoreline vendredi 27 à 14 h 30 (si le créneau est confirmé)</span></label></li><li><label><input type="checkbox" data-k="r3"><span>Dîner chez Roanoke jeudi vers 18 h (menu Thanksgiving 59 $)</span></label></li><li><label><input type="checkbox" data-k="r4"><span>Comparer les billets séparés avant d'acheter le C3 CityPASS</span></label></li><li><label><input type="checkbox" data-k="r5"><span>Confirmer le retrait du dossard jeudi matin</span></label></li><li><label><input type="checkbox" data-k="r6"><span>Giordano's samedi 28 vers 13 h (facultatif)</span></label></li></ul><p class="note">Les cases cochées restent enregistrées sur ton téléphone uniquement.</p></div>
-    <div class="card"><h3>Chicago C3 CityPASS</h3><p class="price">109 $ <span class="note">/ personne</span></p><p>Skydeck + croisière Shoreline + Art Institute. 218 $ pour nous deux.</p><p class="note">À comparer avec les billets séparés (≈ 103 $ minimum selon les créneaux). Il faut ensuite réserver le Skydeck et Shoreline après l'achat.</p><p><a class="ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener">Voir le C3 CityPASS ↗</a></p></div>
+    <div class="card"><h3>À réserver maintenant</h3><ul class="checks"><li><label><input type="checkbox" data-k="r0"><span>Skydeck jeudi 26 novembre à 15 h 30</span></label></li><li><label><input type="checkbox" data-k="r1"><span>Art Institute vendredi 27 à 11 h</span></label></li><li><label><input type="checkbox" data-k="r2"><span>Croisière Shoreline vendredi 27 à 14 h 30 (si le créneau est confirmé)</span></label></li><li><label><input type="checkbox" data-k="r3"><span>Roanoke jeudi vers 18 h, table pour 4 (menu Thanksgiving 59 $)</span></label></li><li><label><input type="checkbox" data-k="r4"><span>Comparer les billets séparés avant d'acheter le C3 CityPASS</span></label></li><li><label><input type="checkbox" data-k="r5"><span>Confirmer le retrait du dossard jeudi matin</span></label></li><li><label><input type="checkbox" data-k="r6"><span>Giordano's samedi 28 vers 13 h (facultatif)</span></label></li></ul><p class="note">Les cases cochées restent enregistrées sur ton téléphone uniquement.</p></div>
+    <div class="card"><h3>Chicago C3 CityPASS</h3><p class="price">109 $ <span class="note">/ personne</span></p><p>Skydeck + croisière Shoreline + Art Institute. 436 $ pour nous quatre.</p><p class="note">À comparer avec les billets séparés (≈ 103 $ minimum selon les créneaux). Il faut ensuite réserver le Skydeck et Shoreline après l'achat.</p><p><a class="ext" href="https://www.citypass.com/chicago" target="_blank" rel="noopener">Voir le C3 CityPASS ↗</a></p></div>
+    <div class="card"><h3>La bande</h3><p>Enzo, Noé, Baptiste et Vaiana.</p></div>
     <div class="card"><h3>Hôtel</h3><p><b>Ohio House Motel</b>, 600 N LaSalle Dr, Chicago, IL 60654. Du mercredi 25 au dimanche 29, check-out avant 11 h.</p><span class="maps"> <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Ohio+House+Motel%2C+600+N+LaSalle+Dr%2C+Chicago%2C+IL+60654" target="_blank" rel="noopener">📍 Ohio House</a></span></div>
     <div class="card"><h3>Se déplacer</h3><p>Presque tout se fait à pied. Pour les quelques bus (course du jeudi, retour de Navy Pier samedi), on paie directement avec une carte sans contact : pas besoin de pass CTA.</p></div>
     <div class="card"><h3>Numéros utiles</h3><p>Urgences aux États-Unis : <b>911</b>.</p></div>
