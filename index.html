@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1b2b" media="(prefers-color-scheme: dark)">
 <title>Chicago à Thanksgiving</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,9 +165,19 @@ footer .mini-flag svg { width: 12px; fill: var(--star); }
 .checks input:checked + span { color: var(--muted); text-decoration: line-through; }
 .price { font-family: var(--display); font-weight: 900; font-size: 44px; line-height: 1; }
 .ext { font-weight: 700; }
+html { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 20; background: var(--sign); color: var(--sign-ink); padding: 10px 14px; border-radius: 8px; font-weight: 700; }
+.skip:focus { top: 12px; }
+@media (hover: hover) {
+  .map:hover { border-color: var(--c, var(--accent)); }
+  .route a:hover b, .ext:hover, .top-link:hover { text-decoration: underline; }
+  .days-nav a:not(.is-current):not(.is-today):hover { background: var(--paper); }
+  .plan-b summary:hover { color: var(--c, var(--accent)); }
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#mer-25">Aller au programme</a>
 
 <div class="flag" aria-hidden="true"><span class="stripe"></span><div class="stars"><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg></div><span class="stripe"></span></div>
 <div class="wrap">
