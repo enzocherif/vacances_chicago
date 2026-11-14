@@ -6,184 +6,182 @@
 <title>Chicago à Thanksgiving</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Instrument+Sans:wght@400;600;700&display=swap">
 <style>
-/* Style inspiré d'Apple : typo système (SF Pro sur iPhone/Mac, Inter ailleurs), couleurs système iOS, cartes groupées, barre des jours en verre dépoli. */
+/* Direction : le drapeau de Chicago et le plan du métro « L ».
+   Hero = bandes bleu ciel + étoiles rouges à six branches. Chaque jour est une ligne du L (Blue, Red, Brown, Green, Purple),
+   chaque activité une station. Titres en Big Shoulders, la police dessinée pour la ville de Chicago. */
 :root {
-  --bg: #f5f5f7; --surface: #ffffff; --soft: #f2f2f7; --ink: #1d1d1f; --muted: #6e6e73; --line: rgba(60,60,67,.14);
-  --accent: #0071e3; --glass: rgba(245,245,247,.78);
-  --d1: #007aff; --d2: #ff3b30; --d3: #ff9500; --d4: #34c759; --d5: #af52de;
-  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --bg: #ffffff; --paper: #f1f7fb; --ink: #13253b; --muted: #55657a; --line: #d6e2ec;
+  --sky: #a9d8f0; --star: #e4002b; --accent: #0b6fb3; --sign: #13253b; --sign-ink: #ffffff;
+  --d1: #00a1de; --d2: #c60c30; --d3: #62361b; --d4: #009b3a; --d5: #522398;
+  --display: "Big Shoulders Display", "Oswald", "Arial Narrow", sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000; --surface: #1c1c1e; --soft: #2c2c2e; --ink: #f5f5f7; --muted: #98989d; --line: rgba(84,84,88,.5);
-    --accent: #2997ff; --glass: rgba(0,0,0,.72);
-    --d1: #0a84ff; --d2: #ff453a; --d3: #ff9f0a; --d4: #30d158; --d5: #bf5af2;
-    --shadow: none; color-scheme: dark;
+    --bg: #0d1b2b; --paper: #14263a; --ink: #eef4f9; --muted: #a2b2c4; --line: #26394f;
+    --sky: #3b6f8f; --star: #ff4d63; --accent: #6cc4f0; --sign: #eef4f9; --sign-ink: #0d1b2b;
+    --d1: #33b9ea; --d2: #f0485f; --d3: #c08a64; --d4: #2fc16a; --d5: #a17ce0;
+    color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #000000; --surface: #1c1c1e; --soft: #2c2c2e; --ink: #f5f5f7; --muted: #98989d; --line: rgba(84,84,88,.5);
-  --accent: #2997ff; --glass: rgba(0,0,0,.72);
-  --d1: #0a84ff; --d2: #ff453a; --d3: #ff9f0a; --d4: #30d158; --d5: #bf5af2;
-  --shadow: none; color-scheme: dark;
+  --bg: #0d1b2b; --paper: #14263a; --ink: #eef4f9; --muted: #a2b2c4; --line: #26394f;
+  --sky: #3b6f8f; --star: #ff4d63; --accent: #6cc4f0; --sign: #eef4f9; --sign-ink: #0d1b2b;
+  --d1: #33b9ea; --d2: #f0485f; --d3: #c08a64; --d4: #2fc16a; --d5: #a17ce0;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 78px); }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font-family: var(--font); font-size: 17px; line-height: 1.47; letter-spacing: -.022em;
-  -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
-}
-.wrap { max-width: 680px; margin: 0 auto; padding-inline: 16px; }
-a { color: var(--accent); text-decoration: none; }
-a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 2px; border-radius: 10px; }
-h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.1; letter-spacing: -.03em; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 74px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .flag .star { animation: none !important; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+.wrap { max-width: 660px; margin: 0 auto; padding-inline: 16px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
 
-/* En-tête façon grand titre */
-.hero { padding-block: 44px 20px; }
-.eyebrow { font-size: 15px; font-weight: 600; color: var(--muted); margin: 0 0 6px; letter-spacing: -.01em; }
-.hero h1 { font-size: clamp(38px, 11vw, 56px); font-weight: 700; letter-spacing: -.04em; }
-.hero .dates { margin: 12px 0 0; color: var(--muted); font-size: 19px; line-height: 1.4; }
-.route { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 10px; margin: 24px 0 0; padding: 0; list-style: none; }
-.route a { display: block; padding: 12px 14px; border-radius: 16px; background: var(--surface); box-shadow: var(--shadow); color: var(--ink); }
-.route b { display: flex; align-items: center; gap: 7px; font-size: 17px; font-weight: 600; }
-.route b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
-.route span { display: block; font-size: 14px; color: var(--muted); margin-top: 2px; }
-.today-btn { display: none; margin: 16px 0 0; }
+/* Hero : le drapeau */
+.flag { display: grid; grid-template-rows: 1fr 1.7fr 1fr; height: clamp(150px, 42vw, 230px); padding-block: clamp(14px, 4vw, 24px); }
+.flag .stripe { background: var(--sky); }
+.flag .stars { display: flex; justify-content: center; align-items: center; gap: clamp(10px, 4vw, 34px); }
+.flag .star { width: clamp(38px, 13vw, 66px); height: auto; fill: var(--star); animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; }
+.flag .star:nth-child(2) { animation-delay: .08s; } .flag .star:nth-child(3) { animation-delay: .16s; } .flag .star:nth-child(4) { animation-delay: .24s; }
+@keyframes pop { from { transform: scale(0) rotate(-30deg); } to { transform: none; } }
+.hero { padding-block: 18px 26px; }
+.crew { margin: 0 0 4px; font-weight: 600; color: var(--muted); }
+.hero h1 { font-family: var(--display); font-weight: 900; font-size: clamp(76px, 25vw, 150px); line-height: .82; letter-spacing: -.01em; text-transform: uppercase; }
+.hero .sub1 { display: block; font-family: var(--display); font-weight: 600; font-size: clamp(30px, 9vw, 52px); line-height: 1; margin-top: 6px; text-transform: none; }
+.hero .dates { margin: 14px 0 0; color: var(--muted); max-width: 34em; }
+
+/* Plan de ligne : les 5 jours */
+.route { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+.route::before { content: ""; position: absolute; left: 10%; right: 10%; top: 9px; height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--d1) 0 25%, var(--d2) 25% 50%, var(--d3) 50% 75%, var(--d4) 75%); }
+.route a { display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; color: var(--ink); position: relative; }
+.route a::before { content: ""; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); border: 5px solid var(--c); margin-bottom: 6px; }
+.route b { font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1; }
+.route span { font-size: 13px; color: var(--muted); line-height: 1.25; margin-top: 3px; }
+.today-btn { display: none; margin: 18px 0 0; }
 .today-btn.show { display: block; }
-.today-btn a { display: block; text-align: center; padding: 14px; border-radius: 980px; background: var(--accent); color: #fff; font-weight: 600; }
+.today-btn a { display: block; text-align: center; padding: 13px; border-radius: 8px; background: var(--star); color: #fff; font-weight: 700; text-decoration: none; }
 
-/* Barre des jours en verre dépoli */
-.days-nav {
-  position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px);
-  background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: .5px solid var(--line);
-}
-.days-nav .scroller { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+/* Barre des jours collante */
+.days-nav { position: sticky; top: 0; z-index: 10; padding-top: env(safe-area-inset-top, 0px); background: var(--bg); border-bottom: 1px solid var(--line); }
+.days-nav .scroller { overflow-x: auto; scrollbar-width: none; }
 .days-nav .scroller::-webkit-scrollbar { display: none; }
-.days-nav ol { display: flex; gap: 4px; margin: 0 auto; padding: 8px 16px; list-style: none; width: max-content; }
-.days-nav a { display: flex; flex-direction: column; align-items: center; min-width: 50px; padding: 5px 8px; border-radius: 12px; color: var(--ink); }
-.days-nav .wd { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
-.days-nav .dn { font-size: 20px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
-.days-nav a.is-current { background: var(--surface); box-shadow: var(--shadow); }
-.days-nav a.is-current .dn { color: var(--c); }
-.days-nav a.is-today { background: var(--c); color: #fff; }
-.days-nav a.is-today .wd, .days-nav a.is-today .dn { color: #fff; }
+.days-nav ol { display: flex; gap: 2px; margin: 0 auto; padding: 8px 16px; list-style: none; width: max-content; }
+.days-nav a { display: flex; flex-direction: column; align-items: center; min-width: 52px; padding: 4px 8px 5px; border-radius: 8px; color: var(--ink); text-decoration: none; }
+.days-nav .wd { font-size: 12px; color: var(--muted); font-weight: 600; }
+.days-nav .dn { font-family: var(--display); font-size: 24px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.days-nav a.is-current, .days-nav a.is-today { background: var(--c); color: #fff; }
+.days-nav a.is-current .wd, .days-nav a.is-today .wd { color: #fff; opacity: .85; }
 
-/* Cartes jour */
-main { display: flex; flex-direction: column; gap: 22px; padding-block: 22px 8px; }
-.day { background: var(--surface); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
-.day header { padding: 22px 18px 10px; }
-.day .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0 0 6px; font-size: 13px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
-.tag { color: var(--c); }
-.day h2 { font-size: 28px; font-weight: 700; }
-.day .sub { margin: 8px 0 0; color: var(--muted); }
-.day .body { padding: 8px 18px 20px; display: flex; flex-direction: column; gap: 16px; }
-.day .body h3 { font-size: 21px; font-weight: 700; margin: 10px 0 -4px; }
+/* Jours : panneau de station + ligne */
+main { display: flex; flex-direction: column; gap: 40px; padding-block: 28px 8px; }
+main > .note { font-size: 16px; }
+.day header { background: var(--sign); color: var(--sign-ink); border-radius: 10px; padding: 14px 16px 16px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 14px; align-items: start; }
+.day header::before { content: attr(data-n); grid-row: 1 / span 3; width: 46px; height: 46px; border-radius: 50%; background: var(--c); color: #fff; font-family: var(--display); font-weight: 900; font-size: 28px; display: grid; place-content: center; margin-top: 2px; }
+.day .meta { margin: 0; font-size: 14px; font-weight: 600; opacity: .8; }
+.tag { color: inherit; }
+.day h2 { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: .98; }
+.day .sub { margin: 6px 0 0; font-size: 15px; opacity: .8; }
+.day .body { padding: 18px 0 0; display: flex; flex-direction: column; gap: 18px; }
+.day .body h3 { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; margin: 10px 0 -4px; }
 
-/* Chiffres clés */
-.stats { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.stats div { background: var(--soft); border-radius: 14px; padding: 10px 12px; min-width: 0; }
-.stats dt { font-size: 12px; color: var(--muted); font-weight: 600; }
-.stats dd { margin: 2px 0 0; font-weight: 700; font-size: 17px; line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--ink); }
+.stats { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 3px solid var(--c); border-bottom: 1px solid var(--line); }
+.stats div { padding: 8px 10px 10px 0; min-width: 0; }
+.stats div + div { padding-left: 12px; border-left: 1px solid var(--line); }
+.stats dt { font-size: 13px; color: var(--muted); font-weight: 600; }
+.stats dd { margin: 0; font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.05; font-variant-numeric: tabular-nums; }
 
-/* Frise horaire */
-.timeline { list-style: none; margin: 2px 0 0; padding: 0; }
-.timeline li { position: relative; padding: 0 0 18px 24px; }
-.timeline li::before { content: ""; position: absolute; left: 1px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--accent)); }
-.timeline li::after { content: ""; position: absolute; left: 5.5px; top: 22px; bottom: 2px; width: 1px; background: var(--line); }
+/* La ligne et ses stations */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { position: relative; padding: 0 0 22px 36px; }
+.timeline li::after { content: ""; position: absolute; left: 7px; top: 4px; bottom: -4px; width: 6px; background: var(--c, var(--accent)); }
+.timeline li:last-child::after { bottom: auto; height: 12px; }
+.timeline li:first-child::after { top: 10px; }
+.timeline li::before { content: ""; position: absolute; z-index: 1; left: 0; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--bg); border: 5px solid var(--c, var(--accent)); }
 .timeline li:last-child { padding-bottom: 0; }
-.timeline li:last-child::after { display: none; }
-.timeline time { display: block; font-weight: 600; font-size: 14px; color: var(--c, var(--accent)); font-variant-numeric: tabular-nums; line-height: 1.5; }
+.timeline time { display: block; font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1.15; font-variant-numeric: tabular-nums; }
 .timeline li div { min-width: 0; color: var(--muted); font-size: 16px; }
-.timeline b { display: block; color: var(--ink); font-size: 17px; font-weight: 600; margin-bottom: 1px; }
+.timeline b { display: block; color: var(--ink); font-size: 17px; font-weight: 700; margin-bottom: 2px; }
 
 .slots { margin: 0; display: grid; grid-template-columns: 6.2em minmax(0, 1fr); gap: 10px 12px; }
-.slots dt { font-weight: 600; color: var(--muted); }
-.slots dd { margin: 0; min-width: 0; }
+.slots dt { font-weight: 700; }
+.slots dd { margin: 0; }
 .todo { color: var(--muted); font-style: italic; }
 
-/* Boutons Plans */
 .maps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.map { display: inline-flex; align-items: center; gap: 4px; padding: 5px 11px 5px 9px; border-radius: 980px; background: var(--soft); color: var(--accent); font-size: 14px; font-weight: 600; line-height: 1.25; white-space: nowrap; }
+.map { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px 4px 8px; border-radius: 6px; border: 1.5px solid var(--line); color: var(--ink); background: var(--bg); font-size: 14px; font-weight: 600; line-height: 1.25; white-space: nowrap; text-decoration: none; }
 
-/* Encadrés */
-.info { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--soft); font-size: 15px; color: var(--muted); }
-.info b { display: block; font-size: 16px; color: var(--ink); font-weight: 600; }
-.info .ico { font-size: 20px; line-height: 1.2; flex: none; width: 24px; text-align: center; }
+.info { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 8px; background: var(--paper); font-size: 15px; color: var(--muted); }
+.info b { display: block; font-size: 16px; color: var(--ink); }
+.info .ico { font-size: 18px; line-height: 1.3; flex: none; width: 22px; text-align: center; }
 .info > div { min-width: 0; }
-.info.key { background: color-mix(in srgb, var(--c) 12%, var(--surface)); }
+.info.key { background: color-mix(in srgb, var(--c) 11%, var(--bg)); border-left: 4px solid var(--c); }
 .note { margin: 0; font-size: 15px; color: var(--muted); }
 
-/* Menus dépliants façon iOS */
-.plan-b { background: var(--soft); border-radius: 16px; padding: 0 16px; }
-.plan-b summary { cursor: pointer; font-weight: 600; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.plan-b { border: 1.5px solid var(--line); border-radius: 8px; padding: 0 14px; }
+.plan-b[open] { border-color: var(--c, var(--accent)); }
+.plan-b summary { cursor: pointer; font-weight: 700; padding: 12px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
 .plan-b summary::-webkit-details-marker { display: none; }
-.plan-b summary::after { content: ""; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .2s; flex: none; margin-right: 4px; }
-.plan-b[open] summary::after { transform: rotate(45deg); }
+.plan-b summary::after { content: "+"; font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; color: var(--c, var(--accent)); flex: none; }
+.plan-b[open] summary::after { content: "–"; }
 .plan-b .slots, .plan-b .timeline, .plan-b > .note { padding-bottom: 16px; }
-.plan-b .timeline li div { font-size: 15px; }
 
-/* Le plan d'Enzo, en petit */
-.mini { border: .5px solid var(--line); border-radius: 16px; padding: 12px 14px; font-size: 14px; color: var(--muted); }
-.mini > b { display: block; color: var(--ink); font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.mini { background: var(--paper); border-radius: 8px; padding: 12px 14px; font-size: 14px; color: var(--muted); }
+.mini > b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 6px; }
 .mini ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 12px; }
 .mini li { display: contents; }
-.mini time { font-weight: 600; color: var(--c); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.mini .maps { margin-top: 8px; }
-.mini .map { font-size: 13px; padding: 4px 10px 4px 8px; }
+.mini time { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--ink); white-space: nowrap; }
+.mini .map { font-size: 13px; }
 
-/* Infos pratiques */
-.practical { padding-block: 22px 8px; }
-.practical h2 { font-size: 28px; font-weight: 700; margin: 0 0 14px; }
-.practical .grid { display: flex; flex-direction: column; gap: 12px; }
-.practical .card { background: var(--surface); border-radius: 18px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; box-shadow: var(--shadow); }
-.practical h3 { font-size: 19px; font-weight: 700; }
+.practical { padding-block: 44px 8px; }
+.practical h2 { font-family: var(--display); font-weight: 900; font-size: 44px; line-height: 1; margin: 0 0 8px; text-transform: uppercase; }
+.practical .grid { display: flex; flex-direction: column; }
+.practical .card { padding: 16px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.practical h3 { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.05; }
 .practical p { margin: 0; }
-.top-link { display: inline-block; margin: 18px 0 0; font-weight: 600; }
-footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-align: center; }
+.top-link { display: inline-block; margin: 14px 0 0; font-weight: 700; }
+footer { color: var(--muted); font-size: 14px; padding-block: 20px 40px; }
+footer .mini-flag { display: inline-flex; gap: 4px; vertical-align: -2px; margin-right: 6px; }
+footer .mini-flag svg { width: 12px; fill: var(--star); }
 .table-wrap { overflow-x: auto; }
 .dist { width: 100%; border-collapse: collapse; font-size: 15px; }
-.dist td { padding: 9px 0; border-top: .5px solid var(--line); vertical-align: top; }
-.dist td + td { text-align: right; white-space: nowrap; padding-left: 12px; font-variant-numeric: tabular-nums; font-weight: 600; }
+.dist td { padding: 8px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.dist td + td { text-align: right; white-space: nowrap; padding-left: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .dist tr:first-child td { border-top: 0; }
-.dist .total td { font-weight: 700; color: var(--accent); }
+.dist .total td { font-weight: 800; border-top: 3px solid var(--c, var(--ink)); }
 .plan-b .slots dd b { display: inline; }
 
-/* Checklist */
-.checks { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; }
-.checks li + li { border-top: .5px solid var(--line); }
-.checks label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; padding: 10px 0; }
-.checks input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin: 1px 0 0; border-radius: 50%; border: 1.5px solid var(--muted); flex: none; display: grid; place-content: center; cursor: pointer; }
-.checks input:checked { background: var(--d4); border-color: var(--d4); }
-.checks input:checked::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+.checks { list-style: none; margin: 4px 0 0; padding: 0; }
+.checks li + li { border-top: 1px dashed var(--line); }
+.checks label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; padding: 9px 0; }
+.checks input { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin: 2px 0 0; border-radius: 50%; border: 4px solid var(--line); background: var(--bg); flex: none; cursor: pointer; }
+.checks input:checked { border-color: var(--d4); background: var(--d4); box-shadow: inset 0 0 0 3px var(--bg); }
 .checks input:checked + span { color: var(--muted); text-decoration: line-through; }
-.price { font-weight: 700; font-size: 34px; line-height: 1.1; letter-spacing: -.03em; }
-.ext { font-weight: 600; }
+.price { font-family: var(--display); font-weight: 900; font-size: 44px; line-height: 1; }
+.ext { font-weight: 700; }
 </style>
 </head>
 <body>
 
-<div class="hero-band">
+<div class="flag" aria-hidden="true"><span class="stripe"></span><div class="stars"><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg></div><span class="stripe"></span></div>
 <div class="wrap">
   <header class="hero">
-    <p class="eyebrow">Enzo, Noé, Baptiste et Vaiana · Thanksgiving 2026</p>
-    <h1 id="haut">Chicago à Thanksgiving</h1>
-    <p class="dates">Du mercredi 25 au dimanche 29 novembre 2026. 5 jours, 4 nuits à l'Ohio House, presque tout à pied.</p>
-    <ul class="route" aria-label="Programme">
+    <p class="crew">Enzo, Noé, Baptiste et Vaiana</p>
+    <h1 id="haut">Chicago<span class="sub1">à Thanksgiving</span></h1>
+    <p class="dates">Du mercredi 25 au dimanche 29 novembre 2026. Cinq jours, quatre nuits à l'Ohio House, presque tout à pied.</p>
+    <ol class="route" aria-label="Les cinq jours">
       <li><a href="#mer-25" style="--c: var(--d1)"><b>Mer 25</b><span>Arrivée</span></a></li>
       <li><a href="#jeu-26" style="--c: var(--d2)"><b>Jeu 26</b><span>Thanksgiving</span></a></li>
-      <li><a href="#ven-27" style="--c: var(--d3)"><b>Ven 27</b><span>Loop & rivière</span></a></li>
-      <li><a href="#sam-28" style="--c: var(--d4)"><b>Sam 28</b><span>Lac & Navy Pier</span></a></li>
+      <li><a href="#ven-27" style="--c: var(--d3)"><b>Ven 27</b><span>Loop et rivière</span></a></li>
+      <li><a href="#sam-28" style="--c: var(--d4)"><b>Sam 28</b><span>Lac et Navy Pier</span></a></li>
       <li><a href="#dim-29" style="--c: var(--d5)"><b>Dim 29</b><span>Retour</span></a></li>
-    </ul>
+    </ol>
     <p class="today-btn" id="today-btn"><a href="#">Voir le programme d'aujourd'hui</a></p>
   </header>
-</div>
 </div>
 
 <nav class="days-nav" aria-label="Jours du voyage">
@@ -204,8 +202,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   <p class="note">On regroupe les visites par quartier pour tout voir sans passer la journée dans les transports, en gardant du temps pour manger, prendre des photos et profiter.</p>
 
   <section class="day" id="mer-25" data-date="2026-11-25" style="--c: var(--d1)">
-    <header>
-      <p class="meta"><span class="tag">Mercredi 25 novembre</span> Jour 1</p>
+    <header data-n="1">
+      <p class="meta">Mercredi 25 novembre</p>
       <h2>Arrivée à Chicago</h2>
       <p class="sub">Arrivée tardive en voiture depuis Pittsburgh. Aucune visite prévue ce soir.</p>
     </header>
@@ -218,8 +216,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   </section>
 
   <section class="day" id="jeu-26" data-date="2026-11-26" style="--c: var(--d2)">
-    <header>
-      <p class="meta"><span class="tag">Jeudi 26 novembre · Thanksgiving</span> Jour 2</p>
+    <header data-n="2">
+      <p class="meta">Jeudi 26 novembre, Thanksgiving</p>
       <h2>Course, Thanksgiving et Skydeck</h2>
       <p class="sub">Lincoln Park le matin, puis le Loop et la Willis Tower. Pas besoin de la voiture de la journée.</p>
     </header>
@@ -276,8 +274,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   </section>
 
   <section class="day" id="ven-27" data-date="2026-11-27" style="--c: var(--d3)">
-    <header>
-      <p class="meta"><span class="tag">Vendredi 27 novembre</span> Jour 3</p>
+    <header data-n="3">
+      <p class="meta">Vendredi 27 novembre</p>
       <h2>Nutella Café, Route 66 et croisière</h2>
       <p class="sub">Millennium Park, le Loop et la Chicago River. Journée 100 % à pied, pas besoin d'Uber ni de métro si la météo est correcte.</p>
     </header>
@@ -307,8 +305,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   </section>
 
   <section class="day" id="sam-28" data-date="2026-11-28" style="--c: var(--d4)">
-    <header>
-      <p class="meta"><span class="tag">Samedi 28 novembre</span> Jour 4</p>
+    <header data-n="4">
+      <p class="meta">Samedi 28 novembre</p>
       <h2>Magnificent Mile, plage, Starbucks et Navy Pier</h2>
       <p class="sub">On part vers le nord, puis on redescend vers le Starbucks avant Navy Pier. Journée tranquille, à pied et sans Uber.</p>
     </header>
@@ -340,8 +338,8 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   </section>
 
   <section class="day" id="dim-29" data-date="2026-11-29" style="--c: var(--d5)">
-    <header>
-      <p class="meta"><span class="tag">Dimanche 29 novembre</span> Jour 5</p>
+    <header data-n="5">
+      <p class="meta">Dimanche 29 novembre</p>
       <h2>Dernière matinée et retour à Pittsburgh</h2>
       <p class="sub">Bon brunch, dernière balade au bord de la rivière, puis la route. Aucune attraction payante. Horaires à l'heure de Chicago.</p>
     </header>
@@ -385,7 +383,7 @@ footer { color: var(--muted); font-size: 13px; padding-block: 22px 40px; text-al
   <a class="top-link" href="#haut">↑ Retour en haut</a>
 </section>
 
-<footer>Bon voyage à Chicago 🦃</footer>
+<footer><span class="mini-flag" aria-hidden="true"><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg><svg class="star" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.0,0.0 37.5,28.3 6.7,25.0 25.0,50.0 6.7,75.0 37.5,71.7 50.0,100.0 62.5,71.7 93.3,75.0 75.0,50.0 93.3,25.0 62.5,28.3"/></svg></span>Bon voyage à Chicago 🦃</footer>
 </div>
 
 <script>
